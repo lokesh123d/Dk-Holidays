@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment Files
+.env
+.env.local
+.env.production
+.env.development
+*.env
+!.env.example
+
+# Firebase
+firebase-service-account.json
+*-firebase-adminsdk-*.json
+.firebase/
+.firebaserc
+
+# Build Outputs
+dist/
+build/
+coverage/
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.nyc_output/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Production
+*.tgz
+server/config/serviceAccountKey.json

@@ -1,0 +1,27 @@
+{
+    "name": "dk-holidays-mern",
+    "version": "1.0.0",
+    "description": "DK Holidays - Car Rental Application (MERN Stack with Firebase)",
+    "main": "index.js",
+    "scripts": {
+        "install-all": "cd server && npm install && cd ../client && npm install",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "cd server && npm run dev",
+        "client": "cd client && npm run dev",
+        "build": "cd client && npm run build",
+        "make-admin": "cd server && node makeAdmin.js"
+    },
+    "keywords": [
+        "mern",
+        "car-rental",
+        "firebase",
+        "react",
+        "nodejs",
+        "express"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}

@@ -1,0 +1,354 @@
+/* ===================================
+   FLIGHT BOOKING PAGE - Warm Theme
+   =================================== */
+
+.train-booking-page {
+  min-height: 100vh;
+  background: var(--cream);
+}
+
+/* Hero Section */
+.train-hero {
+  background: var(--gradient-brown);
+  padding: 80px 0;
+  text-align: center;
+  color: white;
+}
+
+.train-hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: white !important;
+}
+
+.train-hero p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Search Section */
+.search-section {
+  padding: 60px 0;
+  background: white;
+  margin-top: -30px;
+  border-radius: 20px 20px 0 0;
+}
+
+.train-search-form {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(79, 32, 13, 0.1);
+  border: 2px solid var(--cream-dark);
+}
+
+/* Trip Type */
+.trip-type {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--cream-dark);
+}
+
+.trip-type label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--brown);
+  cursor: pointer;
+}
+
+.trip-type input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--orange);
+  cursor: pointer;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brown);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 15px;
+  border: 2px solid var(--cream-dark);
+  border-radius: 10px;
+  font-size: 16px;
+  color: var(--brown);
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--orange);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 132, 0, 0.1);
+}
+
+/* Search Button */
+.search-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--gradient-warm);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 132, 0, 0.3);
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 132, 0, 0.4);
+}
+
+.search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Results Section */
+.results-section {
+  padding: 60px 0;
+  background: var(--cream);
+}
+
+.results-section h2 {
+  color: var(--brown);
+  font-size: 36px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Trains List */
+.trains-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.train-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(79, 32, 13, 0.1);
+  border: 2px solid var(--cream-dark);
+  transition: all 0.3s ease;
+}
+
+.train-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 132, 0, 0.2);
+  border-color: var(--orange);
+}
+
+/* Train Info */
+.train-info {
+  flex: 1;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.airline h3 {
+  color: var(--brown);
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.airline p {
+  color: var(--brown-light);
+  font-size: 14px;
+}
+
+/* Route */
+.route {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+}
+
+.departure,
+.arrival {
+  text-align: center;
+}
+
+.departure h4,
+.arrival h4 {
+  color: var(--brown);
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.time {
+  color: var(--orange);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.duration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 100px;
+}
+
+.duration p {
+  color: var(--brown-light);
+  font-size: 14px;
+}
+
+.line {
+  width: 100px;
+  height: 2px;
+  background: var(--gradient-warm);
+  position: relative;
+}
+
+.line::before,
+.line::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.line::before {
+  left: 0;
+}
+
+.line::after {
+  right: 0;
+}
+
+/* Train Price */
+.train-price {
+  text-align: center;
+  padding-left: 30px;
+  border-left: 2px solid var(--cream-dark);
+}
+
+.seats {
+  color: var(--brown-light);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.train-price h3 {
+  color: var(--orange);
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.train-price>p {
+  color: var(--brown-light);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.book-btn {
+  padding: 12px 30px;
+  background: var(--gradient-warm);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 132, 0, 0.4);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 15px;
+  border: 2px dashed var(--cream-dark);
+}
+
+.no-results p {
+  color: var(--brown-light);
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .train-hero h1 {
+    font-size: 32px;
+  }
+
+  .train-search-form {
+    padding: 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .train-card {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .train-info {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .route {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .train-price {
+    border-left: none;
+    border-top: 2px solid var(--cream-dark);
+    padding-left: 0;
+    padding-top: 20px;
+    width: 100%;
+  }
+}

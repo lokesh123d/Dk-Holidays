@@ -1,0 +1,412 @@
+/* ============================================
+   PINTEREST THEME - Clean & Modern
+   ============================================ */
+
+:root {
+    /* Pinterest Colors */
+    --pinterest-red: #E60023;
+    --pinterest-red-hover: #AD081B;
+    --pinterest-black: #000000;
+    --pinterest-gray: #767676;
+    --pinterest-light-gray: #EFEFEF;
+    --pinterest-white: #FFFFFF;
+
+    /* Gradients */
+    --gradient-red: linear-gradient(135deg, #E60023 0%, #AD081B 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 1px 6px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 2px 12px rgba(0, 0, 0, 0.15);
+    --shadow-strong: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+    /* Update existing variables */
+    --primary-color: var(--pinterest-red);
+    --secondary-color: var(--pinterest-gray);
+    --text-primary: var(--pinterest-black);
+    --text-secondary: var(--pinterest-gray);
+    --background-color: var(--pinterest-white);
+
+    /* Remove old warm colors */
+    --cream: var(--pinterest-white);
+    --yellow: var(--pinterest-red);
+    --orange: var(--pinterest-red);
+    --brown: var(--pinterest-black);
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+body {
+    background: var(--pinterest-white) !important;
+    color: var(--pinterest-black) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn-primary,
+.submit-btn,
+.add-btn,
+.submit-contact-btn,
+.claim-offer-btn,
+.search-btn,
+.book-btn {
+    background: var(--pinterest-red) !important;
+    border: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    border-radius: 24px !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover,
+.submit-btn:hover,
+.add-btn:hover,
+.submit-contact-btn:hover,
+.claim-offer-btn:hover,
+.search-btn:hover,
+.book-btn:hover {
+    background: var(--pinterest-red-hover) !important;
+    box-shadow: var(--shadow-medium) !important;
+    transform: scale(1.02) !important;
+}
+
+.google-btn-primary {
+    background: white !important;
+    border: 1px solid var(--pinterest-light-gray) !important;
+    color: var(--pinterest-black) !important;
+    box-shadow: var(--shadow-soft) !important;
+    border-radius: 24px !important;
+}
+
+.google-btn-primary:hover {
+    background: var(--pinterest-light-gray) !important;
+    box-shadow: var(--shadow-medium) !important;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.car-card,
+.review-card,
+.offer-card,
+.service-nav-card,
+.flight-card,
+.train-card {
+    background: var(--pinterest-white) !important;
+    border: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    transition: all 0.3s ease !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+
+.car-card:hover,
+.review-card:hover,
+.offer-card:hover,
+.service-nav-card:hover,
+.flight-card:hover,
+.train-card:hover {
+    box-shadow: var(--shadow-strong) !important;
+    transform: translateY(-4px) !important;
+}
+
+/* Service Cards */
+.service-nav-card {
+    border-radius: 16px !important;
+    padding: 32px 24px !important;
+}
+
+.service-nav-card::before {
+    background: var(--pinterest-red) !important;
+}
+
+/* ============================================
+   HEADINGS
+   ============================================ */
+
+h1,
+h2,
+h3,
+.section-title {
+    color: var(--pinterest-black) !important;
+    font-weight: 700 !important;
+}
+
+h1::after,
+h2::after,
+.section-title::after {
+    background: var(--pinterest-red) !important;
+    height: 3px !important;
+    width: 48px !important;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.navbar {
+    background: var(--pinterest-white) !important;
+    border-bottom: 1px solid var(--pinterest-light-gray) !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+.navbar .brand-logo h1 {
+    color: var(--pinterest-red) !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+.nav-link {
+    color: var(--pinterest-black) !important;
+    font-weight: 600 !important;
+}
+
+.nav-link:hover {
+    color: var(--pinterest-red) !important;
+}
+
+.dropdown-menu {
+    background: var(--pinterest-white) !important;
+    border: 1px solid var(--pinterest-light-gray) !important;
+    box-shadow: var(--shadow-medium) !important;
+    border-radius: 16px !important;
+}
+
+/* ============================================
+   INPUTS & FORMS
+   ============================================ */
+
+input,
+textarea,
+select {
+    background: var(--pinterest-white) !important;
+    border: 2px solid var(--pinterest-light-gray) !important;
+    color: var(--pinterest-black) !important;
+    border-radius: 16px !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--pinterest-red) !important;
+    box-shadow: 0 0 0 3px rgba(230, 0, 35, 0.1) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--pinterest-gray) !important;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+.admin-table {
+    background: var(--pinterest-white) !important;
+    border: 1px solid var(--pinterest-light-gray) !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+
+.admin-table th {
+    background: var(--pinterest-red) !important;
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+.admin-table tr:hover {
+    background: var(--pinterest-light-gray) !important;
+}
+
+.admin-table td {
+    color: var(--pinterest-black) !important;
+}
+
+/* ============================================
+   BADGES & TAGS
+   ============================================ */
+
+.discount-badge {
+    background: var(--pinterest-red) !important;
+    color: white !important;
+    box-shadow: var(--shadow-soft) !important;
+    border-radius: 16px !important;
+}
+
+.promo-code {
+    background: var(--pinterest-light-gray) !important;
+    border: none !important;
+    color: var(--pinterest-black) !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+}
+
+.rating-stars,
+.filled {
+    color: #FFD700 !important;
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+
+section {
+    background: var(--pinterest-white) !important;
+}
+
+section:nth-child(even) {
+    background: #FAFAFA !important;
+}
+
+.hero-section,
+.flight-hero,
+.train-hero {
+    background: var(--pinterest-white) !important;
+}
+
+/* ============================================
+   HERO OVERLAY
+   ============================================ */
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ============================================
+   SERVICE ICONS
+   ============================================ */
+
+.service-nav-icon {
+    background: var(--pinterest-red) !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+.flight-card .service-nav-icon,
+.train-card .service-nav-icon,
+.insurance-card .service-nav-icon,
+.car-card .service-nav-icon {
+    background: var(--pinterest-red) !important;
+}
+
+/* ============================================
+   SLIDER
+   ============================================ */
+
+.slider-nav {
+    background: var(--pinterest-red) !important;
+    border-radius: 50% !important;
+    box-shadow: var(--shadow-medium) !important;
+}
+
+.slider-nav:hover {
+    background: var(--pinterest-red-hover) !important;
+}
+
+.dot {
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dot.active {
+    background: var(--pinterest-red) !important;
+    border-color: white !important;
+}
+
+/* ============================================
+   SPECIFIC COMPONENTS
+   ============================================ */
+
+.delete-btn {
+    background: var(--pinterest-red) !important;
+    border-radius: 24px !important;
+}
+
+.edit-btn {
+    background: var(--pinterest-black) !important;
+    color: white !important;
+    border-radius: 24px !important;
+}
+
+.edit-btn:hover {
+    background: var(--pinterest-gray) !important;
+}
+
+.no-data,
+.coming-soon,
+.no-results {
+    background: var(--pinterest-light-gray) !important;
+    color: var(--pinterest-gray) !important;
+    border-radius: 16px !important;
+}
+
+/* Stats Cards */
+.stat-card {
+    background: var(--pinterest-white) !important;
+    border: 1px solid var(--pinterest-light-gray) !important;
+    box-shadow: var(--shadow-soft) !important;
+    border-radius: 16px !important;
+}
+
+.stat-number {
+    color: var(--pinterest-red) !important;
+}
+
+/* ============================================
+   TOAST NOTIFICATIONS
+   ============================================ */
+
+.Toastify__toast--success {
+    background: var(--pinterest-red) !important;
+    border-radius: 16px !important;
+}
+
+.Toastify__toast--error {
+    background: var(--pinterest-black) !important;
+    border-radius: 16px !important;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .navbar {
+        border-bottom-width: 1px !important;
+    }
+}
+
+/* ============================================
+   PINTEREST-STYLE UTILITIES
+   ============================================ */
+
+.pinterest-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s ease;
+}
+
+.pinterest-card:hover {
+    box-shadow: var(--shadow-strong);
+}
+
+.pinterest-button {
+    background: var(--pinterest-red);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 12px 24px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pinterest-button:hover {
+    background: var(--pinterest-red-hover);
+    transform: scale(1.02);
+}
