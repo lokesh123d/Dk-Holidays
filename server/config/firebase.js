@@ -5,19 +5,31 @@ let firebaseApp;
 try {
     let credential;
 
-    if (process.env.FIREBASE_PRIVATE_KEY) {
+    if (process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_PROJECT_ID) {
         console.log('Using Firebase environment variables for production');
 
-        // Handle different private key formats
         let privateKey = process.env.FIREBASE_PRIVATE_KEY;
 
-        // Method 1: If key has \\n, replace with actual newlines
+        // Handle different formats:
+        // 1. If key has literal \n strings, replace with actual newlines
         if (privateKey.includes('\\n')) {
             privateKey = privateKey.replace(/\\n/g, '\n');
         }
 
-        // Method 2: Remove quotes if present
+        // 2. Remove quotes if present
+        if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+            privateKey = privateKey.slice(1, -1);
+        }
+
+        // 3. Remove quotes and process escapes
         privateKey = privateKey.replace(/^["']|["']$/g, '');
+
+        console.log('Private key format check:', {
+            hasBeginMarker: privateKey.includes('BEGIN PRIVATE KEY'),
+            hasEndMarker: privateKey.includes('END PRIVATE KEY'),
+            length: privateKey.length,
+            hasNewlines: privateKey.includes('\n')
+        });
 
         credential = admin.credential.cert({
             projectId: process.env.FIREBASE_PROJECT_ID,
@@ -40,10 +52,10 @@ try {
     console.log('📦 Project ID:', process.env.FIREBASE_PROJECT_ID || 'from JSON file');
 } catch (error) {
     console.error('❌ Firebase Admin initialization error:', error.message);
+    console.error('Full error:', error);
 
-    if (!process.env.FIREBASE_PRIVATE_KEY) {
-        console.error('💡 For production: Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY');
-        console.error('💡 For development: Make sure serviceAccountKey.json exists in server/config/');
+    if (process.env.FIREBASE_PRIVATE_KEY) {
+        console.error('Private key preview (first 100 chars):', process.env.FIREBASE_PRIVATE_KEY.substring(0, 100));
     }
 
     process.exit(1);
