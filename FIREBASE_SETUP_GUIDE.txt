@@ -1,0 +1,88 @@
+# ==========================================
+# COMPLETE FIREBASE SETUP - STEP BY STEP
+# ==========================================
+
+## STEP 1: Download Fresh Firebase Service Account
+
+1. Go to: https://console.firebase.google.com/project/dk-holidays/settings/serviceaccounts/adminsdk
+
+2. Click: "Generate new private key"
+
+3. Confirm: "Generate key"
+
+4. File downloads: dk-holidays-firebase-adminsdk-xxxxx.json
+
+## STEP 2: Extract Values from JSON
+
+Open downloaded file and find these values:
+
+```json
+{
+  "project_id": "dk-holidays",
+  "client_email": "firebase-adminsdk-xxxxx@dk-holidays.iam.gserviceaccount.com",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIE...(VERY LONG)...\n-----END PRIVATE KEY-----\n"
+}
+```
+
+## STEP 3: For RENDER - Add to Environment Variables
+
+Go to: https://dashboard.render.com → dk-holidays-backend → Environment
+
+Add these variables:
+
+### Variable 1:
+Key: FIREBASE_PROJECT_ID
+Value: dk-holidays
+
+### Variable 2:
+Key: FIREBASE_CLIENT_EMAIL
+Value: (copy from JSON - the full email)
+
+### Variable 3:
+Key: FIREBASE_PRIVATE_KEY
+Value: (SEE BELOW - TWO OPTIONS)
+
+#### OPTION A - Multi-line (Recommended):
+Copy the private_key value from JSON
+Remove the quotes from start and end
+Replace \n with actual newlines (press Enter)
+Paste in Render
+
+Should look like:
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC... (line 1)
+BROFAAsCBKKhniIGDZF/cdzsd4tcamP+yhrad3A1fPd4s4qpf353... (line 2)
+... (many more lines - total should be ~25-30 lines)
+-----END PRIVATE KEY-----
+
+#### OPTION B - Single line with \\n:
+Copy ENTIRE private_key value from JSON including quotes
+Replace single \ with double \\
+So \n becomes \\n
+
+Example:
+"-----BEGIN PRIVATE KEY-----\\nMIIEvQ...\\n-----END PRIVATE KEY-----\\n"
+
+## STEP 4: For LOCAL - Copy JSON File
+
+Save the downloaded JSON file as:
+server/config/serviceAccountKey.json
+
+This file should NOT be committed to Git (already in .gitignore)
+
+## STEP 5: Test
+
+Render will auto-deploy after saving variables
+Local: npm run dev (in server folder)
+
+## VERIFICATION
+
+Render logs should show:
+✅ Firebase Admin initialized successfully
+📦 Project ID: dk-holidays
+
+Local terminal should show:
+Using Firebase service account JSON file for development
+✅ Firebase Admin initialized successfully
+
+==========================================

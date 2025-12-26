@@ -62,7 +62,7 @@ try {
 }
 
 const db = admin.firestore();
-const realtimeDb = admin.database();
+const realtimeDb = process.env.FIREBASE_DATABASE_URL ? admin.database() : null;
 const auth = admin.auth();
 const storage = admin.storage();
 
