@@ -1,0 +1,58 @@
+# ==========================================
+# RENDER ENVIRONMENT VARIABLES
+# Copy-Paste These in Render Dashboard
+# ==========================================
+
+# 1. Server Configuration
+PORT=5000
+
+# 2. Node Environment
+NODE_ENV=production
+
+# 3. Admin Emails
+ADMIN_EMAILS=thelokesh340@gmail.com,lokesh25@navgurukul.org
+
+# 4. CORS Origins (Update with your Vercel URL after deployment)
+CORS_ORIGINS=http://localhost:3000,https://dk-holidays.vercel.app,https://dk-holidays-*.vercel.app
+
+# 5. Firebase Project ID
+FIREBASE_PROJECT_ID=dk-holidays
+
+# 6. Firebase Client Email
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc00k-holidays.iam.gserviceaccount.com
+
+# 7. Firebase Private Key (IMPORTANT: Copy EXACTLY as shown - with quotes and \n)
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC8nQPkrxiG9w0eBROFAAsCBKKhniIGDZF/cdzsd4tcamP+yhrad3A1fPd4s4qpf353DW5sYnEDPqB/8pn1hRRKKl0S/IS1jaefscCBuyZACjeqQhJTXBTa1OKSzR1pS1/0TLsqnVkInpDdNhPu7xluWboNhtqPAdAe5bdgk8ln6mOn0pxNlI0Pl7Ng5BvqhWLdrdRLB8.nYDoDMBDJexfeyYa<=V1bVpuzUKoeJejSstkrLmLj1vpjzfnhqKA0ZsxlkAE3zUkxv1i0vjy2AxlcxbKAb4KdAszmxuorPCpBDCx0LeD9yNEazXnl2VW/kJ2sS0rDz4ApKuVEP4UQ/zJnHzuARoGm+J5JuJEvuS3KlOJqOUlOMloujallnVkDluzqLsp/aW0nWCDPoPdFAOiILLah09LD8ouZqjK0z2vSng3xXCCCuNzED9yNEazXnl2+JAYd+HfkHd1IAHn0qpuRk7uKGOTjJuo+ekBbh+8j/31vlarOx1RbXP3jgD3/4zkiKFIrm0R/JnN51JL3mHTND7FFJ3eFzPsLY1h8gJTAri1lM5T3dMOad6QkymdBd87TT9dB6llUymL4QDMRBnfTQNerEuUjL3dTyl+thWFV20mGWzisadnH4C2N/xW3DE5WMq1SuDshhNbJyxKuBkD8bDqZ7lD7ZulxkERMAwacEho\n-----END PRIVATE KEY-----\n"
+
+# ==========================================
+# HOW TO ADD IN RENDER:
+# ==========================================
+# 1. Go to: https://dashboard.render.com
+# 2. Select your service: dk-holidays-backend
+# 3. Click "Environment" tab
+# 4. Click "Add Environment Variable"
+# 5. Copy-paste each KEY and VALUE above
+# 6. Click "Save Changes"
+# 7. Service will auto-redeploy (2-3 minutes)
+
+# ==========================================
+# IMPORTANT NOTES:
+# ==========================================
+# - FIREBASE_PRIVATE_KEY must include quotes: "..."
+# - Use \n for newlines (backslash-n)
+# - Copy the ENTIRE key including BEGIN and END markers
+# - Do NOT modify the format
+
+# ==========================================
+# VERIFICATION:
+# ==========================================
+# After deployment, check logs for:
+# ✅ Using Firebase environment variables for production
+# ✅ Firebase Admin initialized successfully
+# 📦 Project ID: dk-holidays
+# 🚀 Server is running on port 5000
+
+# ==========================================
+# TEST YOUR BACKEND:
+# ==========================================
+# https://dk-holidays.onrender.com/api/cars
