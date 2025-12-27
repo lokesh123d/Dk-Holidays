@@ -49,3 +49,4 @@ lerna-debug.log*
 # Production
 *.tgz
 server/config/serviceAccountKey.json
+server/config/serviceAccountKey.json
