@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: dk-holidays-backend
+    env: node
+    region: oregon
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        sync: false
+      # Add your other environment variables from the Render dashboard
+      # or sync them from your .env file manually

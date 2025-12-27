@@ -1,0 +1,76 @@
+# Environment Variables for Render
+
+Copy these EXACT values into Render Dashboard
+
+## 🔑 Environment Variables (Key = Value)
+
+NODE_ENV=production
+
+PORT=5000
+
+FIREBASE_PROJECT_ID=dk-holidays
+
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@dk-holidays.iam.gserviceaccount.com
+
+FIREBASE_DATABASE_URL=https://dk-holidays-default-rtdb.firebaseio.com
+
+FIREBASE_STORAGE_BUCKET=dk-holidays.firebasestorage.app
+
+ADMIN_EMAILS=thelokesh340@gmail.com
+
+CORS_ORIGINS=https://dk-holidays.web.app,https://dk-holidays.firebaseapp.com,http://localhost:5173
+
+---
+
+## ⚠️ FIREBASE_PRIVATE_KEY
+
+For FIREBASE_PRIVATE_KEY, use ONE of these formats:
+
+### Option 1: Multi-line (Recommended)
+Paste exactly as shown, with real line breaks:
+
+-----BEGIN PRIVATE KEY-----
+MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC/YavMiIDNxVUc
+OufJW7x9GyO35YzS20AcmZGKgoZLhZwqR/wNBm6UN0nB5C7v0gEsPEts8zhE1DEA
+LU5DS7SMyL/siHZaJbFTcHKZICGIkwPJAyHPr9SP5E+LH/j9VqCwyCWGutc74Obs
+thpH5eLbYL5ekc8kjAzDaU03/J4tKDmHDAXGCWpxVvBEVukAL9reXd81f0ixRyP/
+9DW4FWj63PBaliDsOOXD1TRA1rwm/N/qgiTuK6IQDqZURRz4pCe61bLUac5CFMUk
+afASqIBXo2FJSwJYJuKOMDhIiFGhnwZO2kUMepeqbInk8RlQ+Ps6RtU6BDlUDQrx
+YpNv8649AgMBAAECggEAWAK4KWq65SYzAjT6o+h6kYP6FJdNgChQ3vYmbq6gyLlM
+fEs3V9wV3TZhxndDuIj4fhnKS/O79Dcqw5ySKbN2d+nYDRQibUl5N1h2cwHKOg71
+xiqZEXQYSgXiKKZO8F42rqWUUFW7Jm/Ccqg6BMds4JsoYMAoJPP86J6T4sPbEANq
+hFTgf3CCYezV8bSCUWwOuwW0p/haOJSK8YFQygSUrgjdwHbZdFiomzkQzdeoBAsK
+hHD0UyMe0mCuSbJgWk9HSjIBmIy7bLs41euQdf+DHLMP6rM3Cuy/Ut+vST5YEvpj
+m+0N5rCxz6GoZZVK55KAjM54Lm0fxEH9PvfguHtbhwKBgQD+eBukl6+ju2IrCXSW
+JrOq0EaY7elaeTpDMnayYG/yqCWmYSL2VhU+9jchTPCoNHC2rFqvBImQRF3X3SJU
+Tb7UL5XIJ8Q8aFBglDIdOlinVGfyI69vxMCvHXDZo53FveGHSvTUeXZ7LWh4fXnQ
+32lKOVPKOWwKVgBhp+l3L7SxFwKBgQDAiGfhbUQ9qs5FnkdFk/y+sjO7iQL0hsJB
+0V/H+NYJ06XW8KP+2CeThcXThyYcrpTSAiKLY6SgaF5wCHXaByhmOQUUZ9DtnOjo
+kboDlFaDwEjHBltSLBQbf6vwI/yzLkA9uyJdgus8eopFRGelOduPUmhm7kl74dRv
+NowRT81nywKBgQC+EYpcMyxuuIzHpoVdjcTPRkgk/Dc7a6cX//5ml9+mOO/+STmr
+E3tFDvT4u5ZZnOm/mBcX+OSjTF1n2fVFUNjDdlODMCjEEgpPSQHxkN4dBc+qLfth
+GW3unqfm9+3lgEGPI26hsaPMt4r7zIULfYQQe6dZOfC3+6rHRnr8mjZ1uwKBgQCh
+9Ny1k225FiqIA5nenJsaatr7oUh8G7PjG9YfaGHcSE6T3T+Gy5uXDAuaYXCc5frI
+IgWfDYXZbZIrWeKRMj44pzRvstjcWIbPxG4ePrT8BU7zJJTDLdMIQsCGtC8JJxnh
+E77XvJ5W9JnFpMIvCdl42ZB7LW1hKVnC57axhVi7OwKBgQDiFDEK+clZed1IPn4C
+uu6MH8LLqxUT9OsRc2wc3E57fevOo4/EbT5+Xz/1BFSo6fgBL4GjNb04U0nLthcY
+JMq8Fj2pX5QPsWX3MEgpVpeD948PhbyX0H98lOq6vhM0cfAp+gJnF26jslS+FhZZ
+lS4QvIXAS496L/R1c7tJatkLtg==
+-----END PRIVATE KEY-----
+
+### Option 2: Single line with \n
+-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC/YavMiIDNxVUc\nOufJW7x9GyO35YzS20AcmZGKgoZLhZwqR/wNBm6UN0nB5C7v0gEsPEts8zhE1DEA\nLU5DS7SMyL/siHZaJbFTcHKZICGIkwPJAyHPr9SP5E+LH/j9VqCwyCWGutc74Obs\nthpH5eLbYL5ekc8kjAzDaU03/J4tKDmHDAXGCWpxVvBEVukAL9reXd81f0ixRyP/\n9DW4FWj63PBaliDsOOXD1TRA1rwm/N/qgiTuK6IQDqZURRz4pCe61bLUac5CFMUk\nafASqIBXo2FJSwJYJuKOMDhIiFGhnwZO2kUMepeqbInk8RlQ+Ps6RtU6BDlUDQrx\nYpNv8649AgMBAAECggEAWAK4KWq65SYzAjT6o+h6kYP6FJdNgChQ3vYmbq6gyLlM\nfEs3V9wV3TZhxndDuIj4fhnKS/O79Dcqw5ySKbN2d+nYDRQibUl5N1h2cwHKOg71\nxiqZEXQYSgXiKKZO8F42rqWUUFW7Jm/Ccqg6BMds4JsoYMAoJPP86J6T4sPbEANq\nhFTgf3CCYezV8bSCUWwOuwW0p/haOJSK8YFQygSUrgjdwHbZdFiomzkQzdeoBAsK\nhHD0UyMe0mCuSbJgWk9HSjIBmIy7bLs41euQdf+DHLMP6rM3Cuy/Ut+vST5YEvpj\nm+0N5rCxz6GoZZVK55KAjM54Lm0fxEH9PvfguHtbhwKBgQD+eBukl6+ju2IrCXSW\nJrOq0EaY7elaeTpDMnayYG/yqCWmYSL2VhU+9jchTPCoNHC2rFqvBImQRF3X3SJU\nTb7UL5XIJ8Q8aFBglDIdOlinVGfyI69vxMCvHXDZo53FveGHSvTUeXZ7LWh4fXnQ\n32lKOVPKOWwKVgBhp+l3L7SxFwKBgQDAiGfhbUQ9qs5FnkdFk/y+sjO7iQL0hsJB\n0V/H+NYJ06XW8KP+2CeThcXThyYcrpTSAiKLY6SgaF5wCHXaByhmOQUUZ9DtnOjo\nkboDlFaDwEjHBltSLBQbf6vwI/yzLkA9uyJdgus8eopFRGelOduPUmhm7kl74dRv\nNowRT81nywKBgQC+EYpcMyxuuIzHpoVdjcTPRkgk/Dc7a6cX//5ml9+mOO/+STmr\nE3tFDvT4u5ZZnOm/mBcX+OSjTF1n2fVFUNjDdlODMCjEEgpPSQHxkN4dBc+qLfth\nGW3unqfm9+3lgEGPI26hsaPMt4r7zIULfYQQe6dZOfC3+6rHRnr8mjZ1uwKBgQCh\n9Ny1k225FiqIA5nenJsaatr7oUh8G7PjG9YfaGHcSE6T3T+Gy5uXDAuaYXCc5frI\nIgWfDYXZbZIrWeKRMj44pzRvstjcWIbPxG4ePrT8BU7zJJTDLdMIQsCGtC8JJxnh\nE77XvJ5W9JnFpMIvCdl42ZB7LW1hKVnC57axhVi7OwKBgQDiFDEK+clZed1IPn4C\nuu6MH8LLqxUT9OsRc2wc3E57fevOo4/EbT5+Xz/1BFSo6fgBL4GjNb04U0nLthcY\nJMq8Fj2pX5QPsWX3MEgpVpeD948PhbyX0H98lOq6vhM0cfAp+gJnF26jslS+FhZZ\nlS4QvIXAS496L/R1c7tJatkLtg==\n-----END PRIVATE KEY-----\n
+
+---
+
+## 📝 How to Add in Render
+
+1. Go to Render Dashboard
+2. Select your web service
+3. Go to "Environment" tab
+4. Click "Add Environment Variable"
+5. For each variable:
+   - Enter **Key** (e.g., NODE_ENV)
+   - Enter **Value** (e.g., production)
+   - Click "Save"
+6. After adding all variables, click "Manual Deploy" > "Deploy latest commit"

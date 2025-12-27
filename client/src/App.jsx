@@ -15,6 +15,7 @@ import FlightBooking from './pages/FlightBooking';
 import TrainBooking from './pages/TrainBooking';
 import Insurance from './pages/Insurance';
 import Contact from './pages/Contact';
+import Profile from './pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 
@@ -52,6 +53,14 @@ function App() {
                             element={
                                 <PrivateRoute>
                                     <MyBookings />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/profile"
+                            element={
+                                <PrivateRoute>
+                                    <Profile />
                                 </PrivateRoute>
                             }
                         />

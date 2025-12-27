@@ -13,7 +13,9 @@ const corsOptions = {
             'https://dk-holidays.firebaseapp.com',
             'http://localhost:5173',
             'http://localhost:3000',
-            'http://127.0.0.1:5173'
+            'http://localhost:3001', // Vite dev server
+            'http://127.0.0.1:5173',
+            'http://127.0.0.1:3001'
         ];
 
         // Allow requests with no origin (like mobile apps or Postman)

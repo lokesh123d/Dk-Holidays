@@ -288,9 +288,9 @@ const Home = () => {
                         <div className="hero-text">
                             <p className="hero-subtitle">D K Holidays in Dharamshala, Dharamahala</p>
                             <h1 className="hero-title">
-                                Premier <span className="highlight">Transportation</span><br />
-                                Company Providing<br />
-                                Top-Notch Solutions
+                                <span className="text-red">Premier</span> <span className="highlight">Transportation</span><br />
+                                <span className="text-white">Company Providing</span><br />
+                                <span className="text-red">Top-Notch Solutions</span>
                             </h1>
                             <p className="hero-description">
                                 D K Holidays in Dharamshala is a reputed transportation company that has been providing<br />
@@ -300,21 +300,6 @@ const Home = () => {
                             <button className="cta-btn" onClick={() => document.getElementById('vehicle-fleet').scrollIntoView({ behavior: 'smooth' })}>
                                 Explore Our Fleet
                             </button>
-
-                            <div className="stats-grid">
-                                <div className="stat-card">
-                                    <h3 className="stat-number">15+</h3>
-                                    <p className="stat-label">Years<br />Experience</p>
-                                </div>
-                                <div className="stat-card">
-                                    <h3 className="stat-number">50k+</h3>
-                                    <p className="stat-label">Happy<br />Customers</p>
-                                </div>
-                                <div className="stat-card">
-                                    <h3 className="stat-number">24/7</h3>
-                                    <p className="stat-label">Available<br />Service</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -417,7 +402,6 @@ const Home = () => {
                     {/* Search and Filter Bar */}
                     <div className="search-filter-bar">
                         <div className="search-box">
-                            <i className="fas fa-search"></i>
                             <input
                                 type="text"
                                 placeholder="Search vehicles by name or category..."
@@ -466,15 +450,14 @@ const Home = () => {
                                         <div className="vehicle-header">
                                             <h3 className="vehicle-name">{car.name}</h3>
                                             <div className="vehicle-rating">
-                                                <i className="fas fa-heart"></i>
                                                 <span>{car.likes}</span>
                                             </div>
                                         </div>
                                         <div className="vehicle-specs">
-                                            <span className="spec"><i className="fas fa-user"></i> {car.seats} Seats</span>
-                                            <span className="spec"><i className="fas fa-cog"></i> {car.transmission}</span>
-                                            <span className="spec"><i className="fas fa-door-closed"></i> {car.doors} Doors</span>
-                                            <span className="spec"><i className="fas fa-car"></i> {car.category}</span>
+                                            <span className="spec">{car.seats} Seats</span>
+                                            <span className="spec">{car.transmission}</span>
+                                            <span className="spec">{car.doors} Doors</span>
+                                            <span className="spec">{car.category}</span>
                                         </div>
                                         <div className="vehicle-footer">
                                             <div className="price-info">
@@ -508,16 +491,14 @@ const Home = () => {
                                 <p className="offer-description">{offer.description}</p>
                                 <div className="offer-details">
                                     <div className="promo-code">
-                                        <i className="fas fa-tag"></i>
                                         <span>Code: <strong>{offer.code}</strong></span>
                                     </div>
                                     <div className="offer-validity">
-                                        <i className="fas fa-calendar"></i>
                                         <span>Valid till: {new Date(offer.validTill).toLocaleDateString()}</span>
                                     </div>
                                 </div>
                                 <button className="claim-offer-btn">
-                                    <i className="fas fa-gift"></i> Claim Offer
+                                    Claim Offer
                                 </button>
                             </div>
                         ))}
@@ -569,14 +550,20 @@ const Home = () => {
             {/* FAQ Section */}
             <section className="faq-section" id="faq">
                 <div className="container">
-                    <h2 className="section-title">Frequently Asked Questions</h2>
+                    <h2 className="section-title">Questions and answers</h2>
+                    <p className="section-description" style={{ color: '#666', marginBottom: '0' }}>
+                        Everything you need to know about our services
+                    </p>
                     <div className="faq-grid">
                         {faqs.map((faq, index) => (
-                            <div key={index} className="faq-item" onClick={() => toggleFaq(index)}>
+                            <div
+                                key={index}
+                                className={`faq-item ${showFaq[index] ? 'active' : ''}`}
+                                onClick={() => toggleFaq(index)}
+                            >
                                 <div className="faq-question">
-                                    <i className="fas fa-question-circle"></i>
                                     <span>{faq.question}</span>
-                                    <i className={`fas fa-chevron-${showFaq[index] ? 'up' : 'down'} faq-toggle`}></i>
+                                    <span className="faq-toggle"></span>
                                 </div>
                                 {showFaq[index] && (
                                     <p className="faq-answer">{faq.answer}</p>

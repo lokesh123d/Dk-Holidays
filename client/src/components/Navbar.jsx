@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/AuthContext';
 import '../styles/components/Navbar.css';
 
 const Navbar = () => {
     const { currentUser, isAdmin, logout } = useAuth();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
 
     const handleLogout = async () => {
         try {
             await logout();
+            setIsMobileMenuOpen(false);
         } catch (error) {
             console.error('Logout error:', error);
         }
+    };
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+        setIsServicesOpen(false);
+    };
+
+    const toggleServices = () => {
+        setIsServicesOpen(!isServicesOpen);
     };
 
     return (
@@ -19,71 +35,141 @@ const Navbar = () => {
             <nav className="navbar">
                 <div className="container">
                     <div className="nav-wrapper">
-                        <Link to="/" className="logo">
+                        <Link to="/" className="logo" onClick={closeMobileMenu}>
                             <span className="logo-text">DK Holidays</span>
                         </Link>
 
-                        <ul className="nav-menu" id="navMenu">
+                        {/* Mobile Menu Button */}
+                        <button
+                            className={`mobile-menu-btn ${isMobileMenuOpen ? 'active' : ''}`}
+                            onClick={toggleMobileMenu}
+                            aria-label="Toggle menu"
+                        >
+                            <span className="hamburger-line"></span>
+                            <span className="hamburger-line"></span>
+                            <span className="hamburger-line"></span>
+                        </button>
+
+                        {/* Navigation Menu */}
+                        <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
                             <li className="nav-item">
-                                <Link to="/" className="nav-link">Home</Link>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <Link to="/services" className="nav-link">
-                                    Services <i className="fas fa-chevron-down"></i>
+                                <Link to="/" className="nav-link" onClick={closeMobileMenu}>
+                                    <i className="fas fa-home"></i> Home
                                 </Link>
-                                <ul className="dropdown-menu">
-                                    <li><Link to="/services/flights">✈️ Flight Booking</Link></li>
-                                    <li><Link to="/services/trains">🚂 Train Booking</Link></li>
-                                    <li><Link to="/services/insurance">🛡️ Insurance</Link></li>
-                                    <li><Link to="/">🚗 Car Rental</Link></li>
+                            </li>
+
+                            <li className={`nav-item dropdown ${isServicesOpen ? 'active' : ''}`}>
+                                <button
+                                    className="nav-link dropdown-toggle"
+                                    onClick={toggleServices}
+                                >
+                                    <i className="fas fa-concierge-bell"></i> Services
+                                    <i className={`fas fa-chevron-${isServicesOpen ? 'up' : 'down'}`}></i>
+                                </button>
+                                <ul className={`dropdown-menu ${isServicesOpen ? 'show' : ''}`}>
+                                    <li>
+                                        <Link to="/services/flights" onClick={closeMobileMenu}>
+                                            ✈️ Flight Booking
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/services/trains" onClick={closeMobileMenu}>
+                                            🚂 Train Booking
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/services/insurance" onClick={closeMobileMenu}>
+                                            🛡️ Insurance
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/" onClick={closeMobileMenu}>
+                                            🚗 Car Rental
+                                        </Link>
+                                    </li>
                                 </ul>
                             </li>
+
                             <li className="nav-item">
-                                <a href="#about" className="nav-link">About</a>
+                                <a href="#about" className="nav-link" onClick={closeMobileMenu}>
+                                    <i className="fas fa-info-circle"></i> About
+                                </a>
                             </li>
+
                             <li className="nav-item">
-                                <Link to="/contact" className="nav-link">Contact</Link>
+                                <Link to="/contact" className="nav-link" onClick={closeMobileMenu}>
+                                    <i className="fas fa-envelope"></i> Contact
+                                </Link>
                             </li>
 
                             {currentUser && (
-                                <li className="nav-item">
-                                    <Link to="/my-bookings" className="nav-link">My Bookings</Link>
-                                </li>
+                                <>
+                                    <li className="nav-item">
+                                        <Link to="/my-bookings" className="nav-link" onClick={closeMobileMenu}>
+                                            <i className="fas fa-calendar-check"></i> My Bookings
+                                        </Link>
+                                    </li>
+
+                                    <li className="nav-item mobile-only">
+                                        <Link to="/profile" className="nav-link" onClick={closeMobileMenu}>
+                                            <i className="fas fa-user"></i> My Profile
+                                        </Link>
+                                    </li>
+                                </>
                             )}
 
                             {isAdmin && (
                                 <li className="nav-item">
-                                    <Link to="/admin" className="nav-link admin-link">
+                                    <Link to="/admin" className="nav-link admin-link" onClick={closeMobileMenu}>
                                         <i className="fas fa-user-shield"></i> Admin Dashboard
                                     </Link>
                                 </li>
                             )}
+
+                            {/* Mobile-only authentication buttons */}
+                            <li className="nav-item mobile-only">
+                                {currentUser ? (
+                                    <button className="nav-link logout-link" onClick={handleLogout}>
+                                        <i className="fas fa-sign-out-alt"></i> Logout
+                                    </button>
+                                ) : (
+                                    <Link to="/login" className="nav-link" onClick={closeMobileMenu}>
+                                        <i className="fas fa-sign-in-alt"></i> Sign In
+                                    </Link>
+                                )}
+                            </li>
                         </ul>
 
-                        <div className="user-section">
+                        {/* Desktop User Section */}
+                        <div className="user-section desktop-only">
                             {currentUser ? (
                                 <div className="user-profile">
-                                    <img
-                                        src={currentUser.photoURL || '/default-avatar.png'}
-                                        alt="User"
-                                        className="user-photo"
-                                    />
-                                    <span className="user-name">{currentUser.displayName || currentUser.email}</span>
+                                    <Link to="/profile" className="user-info">
+                                        <img
+                                            src={currentUser.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.displayName || currentUser.email)}&background=random&color=fff`}
+                                            alt="User"
+                                            className="user-photo"
+                                        />
+                                        <span className="user-name">{currentUser.displayName || currentUser.email}</span>
+                                    </Link>
                                     <button className="logout-btn" onClick={handleLogout} title="Logout">
                                         <i className="fas fa-sign-out-alt"></i>
                                         Logout
                                     </button>
                                 </div>
                             ) : (
-                                <Link to="/login" className="sign-in-btn">Sign In</Link>
+                                <Link to="/login" className="sign-in-btn">
+                                    <i className="fas fa-sign-in-alt"></i> Sign In
+                                </Link>
                             )}
                         </div>
-
-                        <button className="mobile-menu-btn" id="mobileMenuBtn">
-                            <i className="fas fa-bars"></i>
-                        </button>
                     </div>
                 </div>
+
+                {/* Overlay for mobile menu */}
+                {isMobileMenuOpen && (
+                    <div className="mobile-overlay" onClick={closeMobileMenu}></div>
+                )}
             </nav>
         </header>
     );

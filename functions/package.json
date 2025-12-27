@@ -1,0 +1,29 @@
+{
+    "name": "dk-holidays-functions",
+    "description": "DK Holidays Cloud Functions",
+    "scripts": {
+        "serve": "firebase emulators:start --only functions",
+        "shell": "firebase functions:shell",
+        "start": "npm run shell",
+        "deploy": "firebase deploy --only functions",
+        "logs": "firebase functions:log"
+    },
+    "engines": {
+        "node": "18"
+    },
+    "main": "index.js",
+    "dependencies": {
+        "firebase-admin": "^12.0.0",
+        "firebase-functions": "^4.5.0",
+        "express": "^4.18.2",
+        "cors": "^2.8.5",
+        "body-parser": "^1.20.2",
+        "axios": "^1.13.2",
+        "dotenv": "^16.3.1",
+        "multer": "^1.4.5-lts.1"
+    },
+    "devDependencies": {
+        "firebase-functions-test": "^3.1.0"
+    },
+    "private": true
+}
