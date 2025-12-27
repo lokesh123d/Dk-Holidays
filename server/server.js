@@ -5,8 +5,34 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+// CORS Configuration - Allow Firebase Hosting and other origins
+const corsOptions = {
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'https://dk-holidays.web.app',
+            'https://dk-holidays.firebaseapp.com',
+            'http://localhost:5173',
+            'http://localhost:3000',
+            'http://127.0.0.1:5173'
+        ];
+
+        // Allow requests with no origin (like mobile apps or Postman)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log('Blocked by CORS:', origin);
+            callback(null, true); // Still allow for now, but log it
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
