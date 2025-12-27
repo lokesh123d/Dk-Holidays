@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { carService } from '../services/apiService';
+import { carService, reviewService, offerService } from '../services/apiService';
 import { toast } from 'react-toastify';
 import '../styles/pages/Home.css';
 
@@ -65,10 +65,9 @@ const Home = () => {
 
     const fetchReviews = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/reviews');
-            const data = await response.json();
-            if (data.success) {
-                setReviews(data.data || []);
+            const response = await reviewService.getAllReviews();
+            if (response.success) {
+                setReviews(response.data || []);
             } else {
                 // Fallback to sample data if API fails
                 setReviews([
@@ -97,10 +96,9 @@ const Home = () => {
 
     const fetchOffers = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/offers');
-            const data = await response.json();
-            if (data.success) {
-                setOffers(data.data || []);
+            const response = await offerService.getAllOffers();
+            if (response.success) {
+                setOffers(response.data || []);
             } else {
                 // Fallback to sample data
                 setOffers([
