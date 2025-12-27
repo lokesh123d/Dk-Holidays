@@ -6,9 +6,10 @@ const { verifyToken, isAdmin } = require('../middleware/auth');
 // Get all active offers
 router.get('/', async (req, res) => {
     try {
+        console.log('📊 Fetching offers from Firestore...');
+
         const offersSnapshot = await db.collection('offers')
             .where('active', '==', true)
-            .orderBy('createdAt', 'desc')
             .get();
 
         const offers = [];
@@ -19,10 +20,23 @@ router.get('/', async (req, res) => {
             });
         });
 
+        // Sort by createdAt in JavaScript (instead of Firestore)
+        offers.sort((a, b) => {
+            const dateA = new Date(a.createdAt || 0);
+            const dateB = new Date(b.createdAt || 0);
+            return dateB - dateA; // Descending order
+        });
+
+        console.log(`✅ Found ${offers.length} offers`);
         res.json({ success: true, data: offers });
     } catch (error) {
-        console.error('Error fetching offers:', error);
-        res.status(500).json({ success: false, message: error.message });
+        console.error('❌ Error fetching offers:', error);
+        console.error('Error details:', error.message, error.stack);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            error: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
     }
 });
 
