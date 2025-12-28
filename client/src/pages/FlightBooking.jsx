@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/pages/FlightBooking.css';
+import { useAuth } from '../utils/AuthContext';
+import BookingModal from '../components/BookingModal';
 
 const FlightBooking = () => {
     const [searchData, setSearchData] = useState({
@@ -15,6 +17,9 @@ const FlightBooking = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [searching, setSearching] = useState(false);
     const [searched, setSearched] = useState(false);
+    const { currentUser } = useAuth();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedFlight, setSelectedFlight] = useState(null);
 
     // Sample flight data
     const sampleFlights = [
@@ -105,7 +110,8 @@ const FlightBooking = () => {
     };
 
     const handleBooking = (flight) => {
-        alert(`Booking ${flight.airline} flight ${flight.flightNumber} for ${searchData.passengers} passenger(s).\nPrice: ₹${flight.price * searchData.passengers}\n\nPlease contact us to complete your booking!`);
+        setSelectedFlight(flight);
+        setIsModalOpen(true);
     };
 
     return (
@@ -274,6 +280,20 @@ const FlightBooking = () => {
                     </div>
                 </section>
             )}
+
+            <BookingModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                selectedItem={selectedFlight}
+                currentUser={currentUser}
+                bookingType="flight"
+                extraData={{
+                    date: searchData.departDate,
+                    returnDate: searchData.tripType === 'round-trip' ? searchData.returnDate : '',
+                    passengers: searchData.passengers,
+                    tripType: searchData.tripType
+                }}
+            />
         </div>
     );
 };

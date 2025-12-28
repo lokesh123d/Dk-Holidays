@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { carService, reviewService, offerService } from '../services/apiService';
 import { toast } from 'react-toastify';
+import { useAuth } from '../utils/AuthContext';
+import BookingModal from '../components/BookingModal';
+
 import '../styles/pages/Home.css';
 
 const Home = () => {
@@ -15,6 +19,15 @@ const Home = () => {
     const [priceFilter, setPriceFilter] = useState('all');
     const [showFaq, setShowFaq] = useState({});
     const [currentSlide, setCurrentSlide] = useState(0);
+    const { currentUser } = useAuth();
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+    const [selectedVehicle, setSelectedVehicle] = useState(null);
+
+    const handleBookNow = (vehicle) => {
+        setSelectedVehicle(vehicle);
+        setIsBookingModalOpen(true);
+    };
+
 
     // Hero slider images
     const heroImages = [
@@ -242,6 +255,36 @@ const Home = () => {
         }));
     };
 
+    // GSAP Animation refs
+    const titleRef = React.useRef(null);
+    const descRef = React.useRef(null);
+    const btnRef = React.useRef(null);
+
+    useEffect(() => {
+        // Dynamic import to avoid SSR issues if any
+        import('gsap').then((gsapModule) => {
+            const gsap = gsapModule.default;
+            const tl = gsap.timeline();
+
+            if (titleRef.current) {
+                tl.fromTo(titleRef.current,
+                    { y: 50, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+                )
+                    .fromTo(descRef.current,
+                        { y: 30, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+                        "-=0.5"
+                    )
+                    .fromTo(btnRef.current,
+                        { y: 20, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+                        "-=0.5"
+                    );
+            }
+        });
+    }, []);
+
     return (
         <div className="home-page">
             <Navbar />
@@ -257,49 +300,26 @@ const Home = () => {
                         />
                     ))}
                     <div className="hero-overlay"></div>
-
-                    {/* Navigation Arrows */}
-                    <button
-                        className="slider-nav prev"
-                        onClick={() => setCurrentSlide((currentSlide - 1 + heroImages.length) % heroImages.length)}
-                    >
-                        ❮
-                    </button>
-                    <button
-                        className="slider-nav next"
-                        onClick={() => setCurrentSlide((currentSlide + 1) % heroImages.length)}
-                    >
-                        ❯
-                    </button>
-
-                    {/* Slider Dots */}
-                    <div className="slider-dots">
-                        {heroImages.map((_, index) => (
-                            <span
-                                key={index}
-                                className={`dot ${currentSlide === index ? 'active' : ''}`}
-                                onClick={() => setCurrentSlide(index)}
-                            />
-                        ))}
-                    </div>
                 </div>
                 <div className="container">
                     <div className="hero-content">
                         <div className="hero-text">
-                            <p className="hero-subtitle">D K Holidays in Dharamshala, Dharamahala</p>
-                            <h1 className="hero-title">
-                                <span className="text-red">Premier</span> <span className="highlight">Transportation</span><br />
-                                <span className="text-white">Company Providing</span><br />
-                                <span className="text-red">Top-Notch Solutions</span>
+                            <p className="hero-subtitle text-red">DK HOLIDAYS</p>
+                            <h1 className="hero-title" ref={titleRef}>
+                                <span className="text-white">A DESTINATION FOR</span><br />
+                                <span className="text-white">ALL YOUR NEEDS</span>
                             </h1>
-                            <p className="hero-description">
-                                D K Holidays in Dharamshala is a reputed transportation company that has been providing<br />
-                                top-notch solutions to meet diverse client needs. Located in the heart of Dharamahala,<br />
-                                making it convenient for clients to access their services.
+                            <p className="hero-description" ref={descRef}>
+                                D K Holidays in Dharamshala is a reputed transportation company that has been providing top-notch solutions to meet diverse client needs. Located in the heart of Dharamshala, making it convenient for clients to access their services.
                             </p>
-                            <button className="cta-btn" onClick={() => document.getElementById('vehicle-fleet').scrollIntoView({ behavior: 'smooth' })}>
-                                Explore Our Fleet
-                            </button>
+                            <div className="hero-actions" ref={btnRef} style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+                                <button className="cta-btn" onClick={() => document.getElementById('vehicle-fleet').scrollIntoView({ behavior: 'smooth' })}>
+                                    EXPLORE VEHICLE FLEET
+                                </button>
+                                <button className="btn-secondary" style={{ padding: '15px 40px', borderRadius: '50px', fontWeight: '700', cursor: 'pointer', href: '/services'}}>
+                                    VIEW SERVICES
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -326,7 +346,7 @@ const Home = () => {
                     <div className="services-nav-grid">
                         <a href="/services/flights" className="service-nav-card flight-card">
                             <div className="service-nav-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/128/2913/2913145.png" alt="Flight" />
+                                <img src="/images/service-flight.png" alt="Flight Booking" />
                             </div>
                             <h3>Flight Booking</h3>
                             <p>Book domestic & international flights at best prices</p>
@@ -337,7 +357,7 @@ const Home = () => {
 
                         <a href="/services/trains" className="service-nav-card train-card">
                             <div className="service-nav-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/128/3448/3448339.png" alt="Train" />
+                                <img src="/images/service-train.png" alt="Train Booking" />
                             </div>
                             <h3>Train Booking</h3>
                             <p>Hassle-free railway ticket booking service</p>
@@ -353,7 +373,7 @@ const Home = () => {
                             rel="noopener noreferrer"
                         >
                             <div className="service-nav-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/128/2331/2331966.png" alt="Insurance" />
+                                <img src="/images/service-insurance.png" alt="Insurance Services" />
                             </div>
                             <h3>Insurance Services</h3>
                             <p>Complete insurance solutions for your protection</p>
@@ -364,7 +384,7 @@ const Home = () => {
 
                         <a href="#vehicle-fleet" className="service-nav-card car-card">
                             <div className="service-nav-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/128/3448/3448432.png" alt="Car Rental" />
+                                <img src="/images/service-car.png" alt="Car Rental" />
                             </div>
                             <h3>Car Rental</h3>
                             <p>Wide range of vehicles for all your travel needs</p>
@@ -464,7 +484,7 @@ const Home = () => {
                                                 <p className="price-label">Daily rate from</p>
                                                 <p className="price">₹{car.price}</p>
                                             </div>
-                                            <button className="rent-btn">Book Now</button>
+                                            <button className="rent-btn" onClick={() => handleBookNow(car)}>Book Now</button>
                                         </div>
                                     </div>
                                 </div>
@@ -550,7 +570,7 @@ const Home = () => {
             {/* FAQ Section */}
             <section className="faq-section" id="faq">
                 <div className="container">
-                    <h2 className="section-title">Questions and answers</h2>
+                    <h2 className="section-title">Frequently Asked Questions</h2>
                     <p className="section-description" style={{ color: '#666', marginBottom: '0' }}>
                         Everything you need to know about our services
                     </p>
@@ -575,91 +595,23 @@ const Home = () => {
             </section>
 
 
-            {/* Contact Form Section */}
-            <section className="contact-form-section" id="contact">
-                <div className="container">
-                    <h2 className="section-title">Get In Touch</h2>
-                    <p className="section-description">Have a question? Send us a message and we'll get back to you shortly</p>
 
-                    <div className="contact-form-wrapper">
-                        <form className="contact-form" onSubmit={(e) => {
-                            e.preventDefault();
-                            toast.success('Thank you for your message! We will contact you soon.');
-                            e.target.reset();
-                        }}>
-                            <div className="form-row">
-                                <div className="form-group">
-                                    <label>Your Name *</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter your name"
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Your Email *</label>
-                                    <input
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group">
-                                    <label>Phone Number *</label>
-                                    <input
-                                        type="tel"
-                                        placeholder="Enter your phone number"
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Subject</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Subject of your message"
-                                    />
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label>Message *</label>
-                                <textarea
-                                    rows="5"
-                                    placeholder="Write your message here..."
-                                    required
-                                ></textarea>
-                            </div>
-                            <button type="submit" className="submit-contact-btn">
-                                <i className="fas fa-paper-plane"></i>
-                                Send Message
-                            </button>
-                        </form>
+            {/* Footer */}
+            <Footer />
 
-                        <div className="contact-info-sidebar">
-                            <div className="info-card">
-                                <i className="fas fa-map-marker-alt"></i>
-                                <h4>Location</h4>
-                                <p>Near Norbulingka Institute, Dharamshala</p>
-                            </div>
-                            <div className="info-card">
-                                <i className="fas fa-phone"></i>
-                                <h4>Call Us</h4>
-                                <p>+91 91782 12412</p>
-                            </div>
-                            <div className="info-card">
-                                <i className="fas fa-envelope"></i>
-                                <h4>Email</h4>
-                                <p>info@dkholidays.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            {/* Booking Modal */}
+            <BookingModal
+                isOpen={isBookingModalOpen}
+                onClose={() => setIsBookingModalOpen(false)}
+                selectedItem={selectedVehicle}
+                currentUser={currentUser}
+            />
+
+
 
             {/* WhatsApp Float Button */}
             <a
-                href="https://wa.me/919178212412"
+                href="https://wa.me/8091780737"
                 className="whatsapp-float"
                 target="_blank"
                 rel="noopener noreferrer"

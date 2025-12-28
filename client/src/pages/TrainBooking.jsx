@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/pages/TrainBooking.css';
+import { useAuth } from '../utils/AuthContext';
+import BookingModal from '../components/BookingModal';
 
 const TrainBooking = () => {
     const [searchData, setSearchData] = useState({
@@ -14,6 +16,9 @@ const TrainBooking = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [searching, setSearching] = useState(false);
     const [searched, setSearched] = useState(false);
+    const { currentUser } = useAuth();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedTrain, setSelectedTrain] = useState(null);
 
     // Sample train data
     const sampleTrains = [
@@ -122,8 +127,8 @@ const TrainBooking = () => {
     };
 
     const handleBooking = (train) => {
-        const price = train.classes[searchData.class];
-        alert(`Booking ${train.name} (${train.trainNumber})\nClass: ${searchData.class.toUpperCase()}\nPassengers: ${searchData.passengers}\nTotal: ₹${price * searchData.passengers}\n\nPlease contact us to complete your booking!`);
+        setSelectedTrain(train);
+        setIsModalOpen(true);
     };
 
     const getClassName = (classKey) => {
@@ -281,6 +286,19 @@ const TrainBooking = () => {
                     </div>
                 </section>
             )}
+
+            <BookingModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                selectedItem={selectedTrain}
+                currentUser={currentUser}
+                bookingType="train"
+                extraData={{
+                    date: searchData.date,
+                    passengers: searchData.passengers,
+                    class: searchData.class
+                }}
+            />
         </div>
     );
 };

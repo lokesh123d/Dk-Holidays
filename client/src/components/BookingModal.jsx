@@ -1,196 +1,301 @@
-import React, { useState } from 'react';
-import './BookingModal.css';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { bookingService } from '../services/apiService';
+import '../styles/components/BookingModal.css';
 
-const BookingModal = ({ isOpen, onClose, bookingData, type }) => {
+const BookingModal = ({ isOpen, onClose, selectedItem, currentUser, bookingType = 'car', extraData = {} }) => {
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
-        email: '',
         phone: '',
-        passengers: bookingData?.passengers || 1,
-        date: bookingData?.date || '',
-        from: bookingData?.from || '',
-        to: bookingData?.to || '',
-        flightNumber: bookingData?.flightNumber || '',
-        trainNumber: bookingData?.trainNumber || '',
-        price: bookingData?.price || 0,
-        totalPrice: (bookingData?.price || 0) * (bookingData?.passengers || 1)
+        email: '',
+        date: '', // Generic date (pickup or flight/train date)
+        returnDate: '', // For round trip or car return
+        pickupLocation: '', // For car
+        message: ''
     });
 
+    // Reset and Pre-fill data
+    // Reset and Pre-fill data
+    useEffect(() => {
+        if (isOpen) {
+            // Set User Data
+            if (currentUser) {
+                setFormData(prev => ({
+                    ...prev,
+                    name: currentUser.displayName || prev.name || '',
+                    email: currentUser.email || prev.email || '',
+                    phone: currentUser.phoneNumber || prev.phone || ''
+                }));
+            }
+
+            // Set Dates from extraData (Flight/Train search)
+            if (extraData.date) {
+                setFormData(prev => ({ ...prev, date: extraData.date }));
+            }
+            if (extraData.returnDate) {
+                setFormData(prev => ({ ...prev, returnDate: extraData.returnDate }));
+            }
+        }
+    }, [isOpen]); // Only run when modal opens to avoid resetting while typing
+
+    if (!isOpen || !selectedItem) return null;
+
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    // Calculate Totals
+    const calculateTotal = () => {
+        if (bookingType === 'car') {
+            if (!formData.date || !formData.returnDate) return 0;
+            const start = new Date(formData.date);
+            const end = new Date(formData.returnDate);
+            const diffTime = Math.abs(end - start);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
+            return diffDays * parseFloat(selectedItem.price);
+        } else if (bookingType === 'flight' || bookingType === 'train') {
+            const passengers = extraData.passengers || 1;
+            // Flight/Train price might be computed in extraData or Item
+            // Usually item.price is per person
+            let price = selectedItem.price;
+            if (bookingType === 'train' && extraData.class && selectedItem.classes) {
+                price = selectedItem.classes[extraData.class];
+            }
+            return price * passengers;
+        }
+        return 0;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
-        // WhatsApp Message
-        const whatsappNumber = '917037447309'; // Add country code
-        const message = `
-*New ${type} Booking Request*
-
-*Customer Details:*
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-
-*Journey Details:*
-From: ${formData.from}
-To: ${formData.to}
-Date: ${formData.date}
-${type === 'Flight' ? `Flight: ${formData.flightNumber}` : `Train: ${formData.trainNumber}`}
-Passengers: ${formData.passengers}
-
-*Payment:*
-Total Amount: ₹${formData.totalPrice}
-
-Please confirm this booking!
-        `.trim();
-
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-        // Send Email using EmailJS
         try {
-            // You need to set up EmailJS account and get these IDs
-            const emailData = {
-                to_email: 'lokesh25@navgurukul.org',
-                subject: `New ${type} Booking - ${formData.name}`,
-                message: message,
-                from_name: formData.name,
-                from_email: formData.email,
-                reply_to: formData.email
+            const total = calculateTotal();
+
+            // 1. Prepare Booking Data (Generic approach)
+            const bookingData = {
+                type: bookingType,
+                itemId: selectedItem.id,
+                itemName: selectedItem.name || selectedItem.airline || selectedItem.trainName, // Handle different objects
+                details: {
+                    ...formData,
+                    ...extraData, // Include class, passengers etc
+                    totalPrice: total
+                },
+                userEmail: formData.email,
+                userName: formData.name,
+                userPhone: formData.phone,
+                status: 'pending'
             };
 
-            // Open WhatsApp
+            // 2. DB Save (if user is logged in)
+            if (currentUser) {
+                try {
+                    await bookingService.createBooking(bookingData);
+                } catch (err) {
+                    console.error("Booking db save failed", err);
+                }
+            }
+
+            // 3. Construct WhatsApp Message
+            let message = `*New ${bookingType.toUpperCase()} Booking Request* 🎫\n\n`;
+
+            if (bookingType === 'car') {
+                const start = new Date(formData.date);
+                const end = new Date(formData.returnDate);
+                const diffDays = Math.ceil(Math.abs(end - start) / (1000 * 60 * 60 * 24)) || 1;
+
+                message += `*Vehicle:* ${selectedItem.name}\n`;
+                message += `*Dates:* ${formData.date} to ${formData.returnDate} (${diffDays} days)\n`;
+                message += `*Location:* ${formData.pickupLocation}\n`;
+            } else if (bookingType === 'flight') {
+                message += `*Airline:* ${selectedItem.airline} (${selectedItem.flightNumber})\n`;
+                message += `*Route:* ${selectedItem.from} ➝ ${selectedItem.to}\n`;
+                message += `*Date:* ${formData.date}\n`;
+                if (extraData.returnDate) message += `*Return:* ${extraData.returnDate}\n`;
+                message += `*Passengers:* ${extraData.passengers}\n`;
+            } else if (bookingType === 'train') {
+                message += `*Train:* ${selectedItem.name} (${selectedItem.trainNumber})\n`;
+                message += `*Route:* ${selectedItem.from} ➝ ${selectedItem.to}\n`;
+                message += `*Date:* ${formData.date}\n`;
+                message += `*Class:* ${extraData.class ? extraData.class.toUpperCase() : 'N/A'}\n`;
+                message += `*Passengers:* ${extraData.passengers}\n`;
+            }
+
+            message += `\n*Customer Details:*\n`;
+            message += `*Name:* ${formData.name}\n`;
+            message += `*Phone:* ${formData.phone}\n`;
+            message += `*Email:* ${formData.email}\n`;
+            message += `\n*Est. Total:* ₹${total}\n`;
+            if (formData.message) message += `*Note:* ${formData.message}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/918091780737?text=${encodedMessage}`;
+
+            // 4. Open WhatsApp
             window.open(whatsappUrl, '_blank');
-
-            // Send Email (you'll need to integrate EmailJS or similar service)
-            await sendEmail(emailData);
-
-            alert('Booking request sent successfully! Our team will contact you soon.');
+            toast.success('Redirecting to WhatsApp to complete your booking!');
             onClose();
+
         } catch (error) {
-            console.error('Error:', error);
-            alert('Booking request sent to WhatsApp. Email sending failed. Please try again.');
+            console.error('Booking error:', error);
+            toast.error('Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
-    const sendEmail = async (data) => {
-        // EmailJS integration
-        // For now, using mailto as fallback
-        const mailtoLink = `mailto:lokesh25@navgurukul.org?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.message)}`;
-        window.location.href = mailtoLink;
+    // Helper to get item image/icon
+    const getItemImage = () => {
+        if (bookingType === 'car') return selectedItem.image;
+        if (bookingType === 'flight') return "https://cdn-icons-png.flaticon.com/128/2913/2913145.png"; // Generic flight icon
+        if (bookingType === 'train') return "https://cdn-icons-png.flaticon.com/128/3448/3448339.png"; // Generic train icon
+        return "";
     };
 
-    if (!isOpen) return null;
+    // Helper to get item title
+    const getItemTitle = () => {
+        if (bookingType === 'car') return selectedItem.name;
+        if (bookingType === 'flight') return `${selectedItem.airline} - ${selectedItem.flightNumber}`;
+        if (bookingType === 'train') return `${selectedItem.name} (${selectedItem.trainNumber})`;
+        return "Booking Item";
+    };
+
+    // Helper to get item subtitle
+    const getItemSubtitle = () => {
+        if (bookingType === 'car') return `₹${selectedItem.price}/day • ${selectedItem.category}`;
+        if (bookingType === 'flight') return `${selectedItem.from} ➝ ${selectedItem.to} • ${selectedItem.duration}`;
+        if (bookingType === 'train') return `${selectedItem.from} ➝ ${selectedItem.to} • ${selectedItem.duration}`;
+        return "";
+    };
 
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <button className="modal-close" onClick={onClose}>×</button>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <div className="modal-header">
+                    <h3 className="modal-title">Book {bookingType.charAt(0).toUpperCase() + bookingType.slice(1)}</h3>
+                    <button className="close-btn" onClick={onClose}>
+                        <i className="fas fa-times"></i>
+                    </button>
+                </div>
 
-                <h2>Complete Your Booking</h2>
-                <p className="modal-subtitle">{type === 'Flight' ? '✈️' : '🚂'} {bookingData?.name}</p>
+                <div className="item-summary">
+                    <img src={getItemImage()} alt="Item" style={{ objectFit: 'contain', padding: '5px', background: 'rgba(255,255,255,0.1)' }} />
+                    <div className="item-details">
+                        <h4>{getItemTitle()}</h4>
+                        <p>{getItemSubtitle()}</p>
+                    </div>
+                </div>
 
-                <form onSubmit={handleSubmit} className="booking-form">
-                    {/* Personal Details */}
-                    <div className="form-section">
-                        <h3>Personal Details</h3>
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label>Full Name *</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="Enter your full name"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Email *</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="your@email.com"
-                                />
-                            </div>
-                        </div>
-
+                <form className="booking-form" onSubmit={handleSubmit}>
+                    <div className="form-row">
                         <div className="form-group">
-                            <label>Phone Number *</label>
+                            <label>Full Name *</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Mobile Number *</label>
                             <input
                                 type="tel"
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleChange}
                                 required
-                                placeholder="Enter your phone number"
-                                pattern="[0-9]{10}"
+                                placeholder="Enter numeric (e.g. 9876543210)"
                             />
                         </div>
                     </div>
 
-                    {/* Journey Details */}
-                    <div className="form-section">
-                        <h3>Journey Details</h3>
-                        <div className="journey-summary">
-                            <div className="journey-item">
-                                <span>From:</span>
-                                <strong>{formData.from}</strong>
-                            </div>
-                            <div className="journey-item">
-                                <span>To:</span>
-                                <strong>{formData.to}</strong>
-                            </div>
-                            <div className="journey-item">
-                                <span>Date:</span>
-                                <strong>{formData.date}</strong>
-                            </div>
-                            <div className="journey-item">
-                                <span>Passengers:</span>
-                                <strong>{formData.passengers}</strong>
-                            </div>
-                            <div className="journey-item">
-                                <span>{type}:</span>
-                                <strong>{type === 'Flight' ? formData.flightNumber : formData.trainNumber}</strong>
-                            </div>
+                    <div className="form-group">
+                        <label>Email Address *</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your email"
+                        />
+                    </div>
+
+                    {/* Date Fields Logic */}
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label>{bookingType === 'car' ? 'Pickup Date *' : 'Departure/Journey Date *'}</label>
+                            <input
+                                type="date"
+                                name="date"
+                                value={formData.date}
+                                onChange={handleChange}
+                                required
+                                min={new Date().toISOString().split('T')[0]}
+                                disabled={bookingType !== 'car'} // Read-only for flight/train as it comes from search
+                            />
                         </div>
+
+                        {(bookingType === 'car' || (bookingType === 'flight' && extraData.returnDate)) && (
+                            <div className="form-group">
+                                <label>Return Date {bookingType === 'car' ? '*' : ''}</label>
+                                <input
+                                    type="date"
+                                    name="returnDate"
+                                    value={formData.returnDate}
+                                    onChange={handleChange}
+                                    required={bookingType === 'car'}
+                                    min={formData.date || new Date().toISOString().split('T')[0]}
+                                    disabled={bookingType !== 'car'}
+                                />
+                            </div>
+                        )}
                     </div>
 
-                    {/* Price Summary */}
-                    <div className="form-section price-section">
-                        <h3>Price Summary</h3>
-                        <div className="price-details">
-                            <div className="price-row">
-                                <span>Base Fare ({formData.passengers} × ₹{formData.price})</span>
-                                <strong>₹{formData.price * formData.passengers}</strong>
-                            </div>
-                            <div className="price-row total">
-                                <span>Total Amount</span>
-                                <strong>₹{formData.totalPrice}</strong>
-                            </div>
+                    {bookingType === 'car' && (
+                        <div className="form-group">
+                            <label>Pickup Location *</label>
+                            <input
+                                type="text"
+                                name="pickupLocation"
+                                value={formData.pickupLocation}
+                                onChange={handleChange}
+                                required
+                                placeholder="e.g. Dharamshala Airport, Bus Stand"
+                            />
                         </div>
+                    )}
+
+                    <div className="form-group">
+                        <label>Any Special Request</label>
+                        <textarea
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            rows="3"
+                            placeholder="Meal preference? Wheelchair? Driver needed?"
+                        ></textarea>
                     </div>
 
-                    {/* Submit Buttons */}
-                    <div className="form-actions">
-                        <button type="button" className="btn-cancel" onClick={onClose}>
-                            Cancel
-                        </button>
-                        <button type="submit" className="btn-submit">
-                            📱 Send Booking Request
-                        </button>
-                    </div>
-
-                    <p className="form-note">
-                        * Your booking details will be sent via WhatsApp & Email. Our team will confirm shortly.
+                    <button type="submit" className="submit-booking-btn" disabled={loading}>
+                        {loading ? 'Processing...' : (
+                            <>
+                                <i className="fab fa-whatsapp"></i> Confirm & Book via WhatsApp
+                            </>
+                        )}
+                    </button>
+                    <p style={{ textAlign: 'center', marginTop: '10px', fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        * Redirects to WhatsApp Admin
                     </p>
                 </form>
             </div>

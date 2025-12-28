@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import '../styles/pages/Services.css';
 
 const Services = () => {
@@ -8,63 +9,31 @@ const Services = () => {
     const services = [
         {
             id: 'car-rental',
-            icon: 'fa-car',
-            title: 'Car Rental Services',
-            description: 'Wide range of vehicles including Sedans, SUVs, Tempo Travellers, and Buses for all your travel needs in Dharamshala and nearby areas.',
-            features: [
-                'Luxury and Economy vehicles',
-                '4, 7, 12, 17, 25 seater options',
-                'Experienced drivers available',
-                'Airport transfers',
-                'Outstation trips',
-                'Corporate bookings'
-            ],
-            color: '#ff4d4d'
+            icon: 'fa-taxi',
+            title: 'Car Rental',
+            description: 'Premium fleet of Sedans, SUVs, and Buses tailored for your comfort. Experience seamless travel across Dharamshala with our expert chauffeurs.',
+            color: '#E50914' // Racing Red
         },
         {
             id: 'flight-booking',
-            icon: 'fa-plane',
+            icon: 'fa-plane-departure',
             title: 'Flight Booking',
-            description: 'Book domestic and international flights at competitive prices with best deals and offers.',
-            features: [
-                'Domestic & International flights',
-                'Best price guarantee',
-                'Multiple airline options',
-                'Easy cancellation & refund',
-                '24/7 booking support',
-                'Special corporate rates'
-            ],
-            color: '#4CAF50'
+            description: 'Unbeatable deals on domestic and international flights. We ensure a smooth booking experience with flexible cancellation options.',
+            color: '#28C76F' // Green
         },
         {
             id: 'train-booking',
-            icon: 'fa-train',
-            title: 'Train Booking',
-            description: 'Hassle-free train ticket booking service for all major routes across India with confirmed bookings.',
-            features: [
-                'All classes available',
-                'Tatkal booking service',
-                'Group booking facilities',
-                'PNR status check',
-                'Seat availability alerts',
-                'E-ticket delivery'
-            ],
-            color: '#2196F3'
+            icon: 'fa-subway',
+            title: 'Train Reservation',
+            description: 'Confirmed tickets for all major routes. From Tatkal to sleeper class, we handle all your railway reservation needs efficiently.',
+            color: '#7367F0' // Purple/Blue
         },
         {
             id: 'insurance',
-            icon: 'fa-shield-alt',
-            title: 'Insurance Services',
-            description: 'Comprehensive insurance solutions for your travel, health, vehicle, and life protection needs.',
-            features: [
-                'Travel insurance',
-                'Health insurance',
-                'Vehicle insurance',
-                'Life insurance',
-                'Quick claim processing',
-                'Best premium rates'
-            ],
-            color: '#9C27B0'
+            icon: 'fa-file-contract',
+            title: 'Travel Insurance',
+            description: 'Comprehensive protection plans for your journey. Safeguard your health and baggage with our trusted insurance partners.',
+            color: '#FF9F43' // Orange
         }
     ];
 
@@ -100,56 +69,46 @@ const Services = () => {
                             className={selectedService === 'car-rental' ? 'active' : ''}
                             onClick={() => setSelectedService('car-rental')}
                         >
-                            <i className="fas fa-car"></i> Car Rental
+                            <i className="fas fa-car-alt"></i> Car Rental
                         </button>
                         <button
                             className={selectedService === 'flight-booking' ? 'active' : ''}
                             onClick={() => setSelectedService('flight-booking')}
                         >
-                            <i className="fas fa-plane"></i> Flights
+                            <i className="fas fa-plane-departure"></i> Flights
                         </button>
                         <button
                             className={selectedService === 'train-booking' ? 'active' : ''}
                             onClick={() => setSelectedService('train-booking')}
                         >
-                            <i className="fas fa-train"></i> Trains
+                            <i className="fas fa-subway"></i> Trains
                         </button>
                         <button
                             className={selectedService === 'insurance' ? 'active' : ''}
                             onClick={() => setSelectedService('insurance')}
                         >
-                            <i className="fas fa-shield-alt"></i> Insurance
+                            <i className="fas fa-user-shield"></i> Insurance
                         </button>
                     </div>
                 </div>
             </section>
 
-            {/* Services Grid */}
+            {/* Services Grid (Minimalist Layout) */}
             <section className="services-grid-section">
                 <div className="container">
                     <div className="services-grid">
                         {filteredServices.map(service => (
                             <div key={service.id} className="service-card">
                                 <div
-                                    className="service-icon"
-                                    style={{ background: `linear-gradient(135deg, ${service.color} 0%, ${service.color}CC 100%)` }}
+                                    className="service-icon-box"
+                                    style={{
+                                        color: service.color
+                                    }}
                                 >
                                     <i className={`fas ${service.icon}`}></i>
                                 </div>
                                 <h2>{service.title}</h2>
                                 <p className="service-description">{service.description}</p>
-                                <ul className="service-features">
-                                    {service.features.map((feature, index) => (
-                                        <li key={index}>
-                                            <i className="fas fa-check-circle"></i>
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <button className="service-cta">
-                                    Learn More
-                                    <i className="fas fa-arrow-right"></i>
-                                </button>
                             </div>
                         ))}
                     </div>

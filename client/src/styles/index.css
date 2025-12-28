@@ -1,14 +1,29 @@
 :root {
-    --primary-color: #ff4d4d;
-    --secondary-color: #2c3e50;
-    --text-primary: #333;
-    --text-secondary: #666;
-    --background: #ffffff;
-    --border-color: #e0e0e0;
+    /* NavGurukul Theme Variables - Updated to Match Screenshot */
+    --primary-color: #E91E63;
+    /* Pink */
+    --primary-hover: #C2185B;
+    --secondary-color: #5E35B1;
+    /* Purple */
+    --background: #FFFFFF;
+    --text-primary: #222222;
+    --text-secondary: #555555;
+    --border-color: #E0E0E0;
     --success: #28a745;
     --warning: #ffc107;
     --danger: #dc3545;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    /* Legacy Mappings */
+    --racing-red: #E91E63;
+    --racing-red-hover: #C2185B;
+    --carbon-black: #FFFFFF;
+    --charcoal-gray: #FAFAFA;
+    --steel-gray: #F5F5F5;
+    --text-white: #222222;
+    --text-gray: #666666;
+    --card-background: #FFFFFF;
+    --background-color: #FFFFFF;
 }
 
 * {
@@ -18,7 +33,7 @@
 }
 
 body {
-    font-family: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Outfit', 'Open Sans', sans-serif;
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--background);
@@ -57,21 +72,24 @@ body {
 
 /* Buttons */
 .cta-btn {
-    padding: 15px 40px;
+    padding: 12px 35px;
     background: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(240, 95, 64, 0.3);
 }
 
 .cta-btn:hover {
-    background: #e63946;
+    background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    box-shadow: 0 6px 20px rgba(240, 95, 64, 0.4);
 }
 
 /* Utility Classes */
@@ -96,6 +114,7 @@ body {
     min-height: 80vh;
     text-align: center;
     padding: 20px;
+    background: var(--background);
 }
 
 .access-denied h1 {
@@ -115,10 +134,11 @@ body {
     background: var(--primary-color);
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 50px;
     transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .access-denied a:hover {
-    background: #e63946;
+    background: var(--primary-hover);
 }

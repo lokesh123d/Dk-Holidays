@@ -69,32 +69,27 @@ const Navbar = () => {
                                 <ul className={`dropdown-menu ${isServicesOpen ? 'show' : ''}`}>
                                     <li>
                                         <Link to="/services/flights" onClick={closeMobileMenu}>
-                                            ✈️ Flight Booking
+                                            Flight Booking
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="/services/trains" onClick={closeMobileMenu}>
-                                            🚂 Train Booking
+                                            Train Booking
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="/services/insurance" onClick={closeMobileMenu}>
-                                            🛡️ Insurance
+                                            Insurance
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="/" onClick={closeMobileMenu}>
-                                            🚗 Car Rental
+                                            Car Rental
                                         </Link>
                                     </li>
                                 </ul>
                             </li>
 
-                            <li className="nav-item">
-                                <a href="#about" className="nav-link" onClick={closeMobileMenu}>
-                                    <i className="fas fa-info-circle"></i> About
-                                </a>
-                            </li>
 
                             <li className="nav-item">
                                 <Link to="/contact" className="nav-link" onClick={closeMobileMenu}>

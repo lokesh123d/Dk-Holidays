@@ -1,41 +1,55 @@
+/* ===================================
+   INSURANCE PAGE - NavGurukul Light Theme
+   =================================== */
+
 .insurance-page {
   padding-top: 80px;
+  background: var(--white);
+  min-height: 100vh;
 }
 
 .insurance-hero {
-  background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
-  color: white;
+  background: var(--brand-bg-light);
+  /* Pink */
+  background-size: cover;
+  background-position: center;
+  color: var(--text-primary);
   padding: 100px 0;
   text-align: center;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .insurance-hero h1 {
   font-size: 48px;
   font-weight: 800;
   margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary-color);
 }
 
 .powered-by {
   font-size: 16px;
   margin-top: 10px;
-  opacity: 0.9;
+  opacity: 1;
+  color: var(--text-secondary);
 }
 
 .advisor-banner {
   padding: 60px 0;
-  background: linear-gradient(to right, #f8f9fa, white);
+  background: var(--white);
 }
 
 .advisor-card {
-  background: white;
-  border-radius: 20px;
+  background: var(--white);
+  border-radius: 12px;
   padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-soft);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 40px;
-  border: 3px solid #9C27B0;
+  border: 1px solid var(--border-color);
 }
 
 .advisor-info {
@@ -48,24 +62,26 @@
 .advisor-icon {
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+  background: var(--off-white);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 2px solid var(--primary-color);
 }
 
 .advisor-icon i {
-  color: white;
+  color: var(--primary-color);
   font-size: 48px;
 }
 
 .advisor-name {
   font-size: 24px;
   font-weight: 700;
-  color: #9C27B0;
+  color: var(--text-primary);
   margin: 10px 0;
+  text-transform: uppercase;
 }
 
 .advisor-company {
@@ -81,26 +97,29 @@
 
 .advisor-cta-btn {
   padding: 15px 35px;
-  background: #9C27B0;
+  background: var(--primary-color);
   color: white;
   text-decoration: none;
-  border-radius: 10px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-weight: 700;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   transition: all 0.3s ease;
   white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .advisor-cta-btn:hover {
-  background: #7B1FA2;
+  background: var(--brand-orange-hover);
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(156, 39, 176, 0.3);
+  box-shadow: 0 5px 20px rgba(233, 30, 99, 0.4);
 }
 
 .insurance-types {
   padding: 80px 0;
+  background: var(--section-bg-alt);
 }
 
 .insurance-grid {
@@ -111,31 +130,34 @@
 }
 
 .insurance-card {
-  background: white;
-  border-radius: 15px;
+  background: var(--white);
+  border-radius: 12px;
   padding: 35px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-soft);
   transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
 }
 
 .insurance-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--primary-color);
 }
 
 .insurance-icon {
   width: 70px;
   height: 70px;
-  background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+  background: rgba(233, 30, 99, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
+  border: none;
 }
 
 .insurance-icon i {
-  color: white;
+  color: var(--primary-color);
   font-size: 32px;
 }
 
@@ -143,6 +165,8 @@
   text-align: center;
   font-size: 22px;
   margin-bottom: 15px;
+  color: var(--text-primary);
+  text-transform: uppercase;
 }
 
 .insurance-description {
@@ -167,30 +191,32 @@
 }
 
 .insurance-features li i {
-  color: #9C27B0;
+  color: var(--primary-color);
   font-size: 16px;
 }
 
 .get-quote-btn {
   width: 100%;
   padding: 12px;
-  background: #9C27B0;
+  background: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-transform: uppercase;
 }
 
 .get-quote-btn:hover {
-  background: #7B1FA2;
+  background: var(--brand-orange-hover);
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
 }
 
 .why-insurance {
   padding: 80px 0;
-  background: #f8f9fa;
+  background: var(--white);
 }
 
 .benefits-grid {
@@ -207,12 +233,23 @@
 
 .benefit-card i {
   font-size: 48px;
-  color: #9C27B0;
+  color: var(--primary-color);
   margin-bottom: 20px;
+}
+
+.benefit-card h3 {
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.benefit-card p {
+  color: var(--text-secondary);
 }
 
 .how-it-works {
   padding: 80px 0;
+  background: var(--brand-bg-light);
+  /* Pink section */
 }
 
 .steps-grid {
@@ -225,15 +262,25 @@
 .step-card {
   text-align: center;
   padding: 30px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-color);
+}
+
+.step-card h3 {
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  color: var(--text-secondary);
 }
 
 .step-number {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+  background: var(--primary-color);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -242,38 +289,50 @@
   font-size: 28px;
   font-weight: 800;
   margin: 0 auto 20px;
+  border: 4px solid var(--white);
 }
 
 .insurance-cta {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-color);
+  background-size: cover;
+  background-position: center;
   color: white;
   padding: 80px 0;
   text-align: center;
+  border-top: none;
 }
 
 .insurance-cta h2 {
   font-size: 36px;
   margin-bottom: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .insurance-note {
-  background: #f8f9fa;
+  background: var(--white);
   padding: 40px 0;
 }
 
 .note-box {
-  background: white;
-  border-left: 4px solid #9C27B0;
+  background: var(--off-white);
+  border-left: 4px solid var(--primary-color);
   padding: 20px 30px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 15px;
+  border: 1px solid var(--border-color);
 }
 
 .note-box i {
-  color: #9C27B0;
+  color: var(--primary-color);
   font-size: 24px;
+}
+
+.note-box p {
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 @media (max-width: 768px) {
@@ -281,11 +340,11 @@
     flex-direction: column;
     text-align: center;
   }
-  
+
   .advisor-info {
     flex-direction: column;
   }
-  
+
   .insurance-grid {
     grid-template-columns: 1fr;
   }

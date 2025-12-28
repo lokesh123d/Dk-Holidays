@@ -188,15 +188,7 @@ const Login = () => {
 
                         {/* Options Row */}
                         <div className="form-options">
-                            <label className="remember-me">
-                                <input
-                                    type="checkbox"
-                                    checked={rememberMe}
-                                    onChange={(e) => setRememberMe(e.target.checked)}
-                                    disabled={loading}
-                                />
-                                <span>Remember for 30 days</span>
-                            </label>
+
                             {!isSignUp && (
                                 <a
                                     href="#forgot"

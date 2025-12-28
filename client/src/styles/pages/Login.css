@@ -1,11 +1,21 @@
-/* Clean Centered Login Design */
+/* Light Theme - Login */
 .login-page {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f7;
-    padding: 40px 20px;
+    background: var(--brand-bg-light);
+    /* Light Pink Background */
+    padding: 100px 20px 40px;
+    /* Account for navbar */
+    position: relative;
+    z-index: 1;
+}
+
+/* Optional: Background image overlay like contact page - Removed for cleaner look or make subtle */
+.login-page::before {
+    display: none;
+    /* Clean look */
 }
 
 .login-container {
@@ -14,39 +24,48 @@
 }
 
 .login-card {
-    background: white;
+    background: var(--white);
     padding: 48px 40px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--border-color);
 }
 
 /* Header */
 .login-header {
     margin-bottom: 32px;
+    text-align: center;
 }
 
 .login-header .subtitle {
-    color: #999;
+    color: var(--text-secondary);
     font-size: 14px;
     margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
 .login-header h1 {
     font-size: 32px;
-    font-weight: 700;
-    color: #1a1a1a;
+    font-weight: 800;
+    color: var(--primary-color);
+    /* Pink Title */
     margin: 0;
+    text-transform: uppercase;
+    font-style: normal;
 }
 
 /* Error Message */
 .error-message {
-    background: #fee;
-    color: #c53030;
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
     padding: 12px 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     margin-bottom: 20px;
     font-size: 14px;
-    border-left: 4px solid #f56565;
+    border-left: 4px solid #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.2);
 }
 
 /* Form */
@@ -55,23 +74,27 @@
 }
 
 .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .form-group input {
     width: 100%;
     padding: 14px 16px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--off-white);
+    border-radius: 6px;
     font-size: 15px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     font-family: inherit;
     box-sizing: border-box;
+    color: var(--text-primary);
+    /* Dark Text */
 }
 
 .form-group input:disabled {
-    background: #f5f5f5;
+    opacity: 0.6;
     cursor: not-allowed;
+    background: #f0f0f0;
 }
 
 .form-group input::placeholder {
@@ -80,8 +103,9 @@
 
 .form-group input:focus {
     outline: none;
-    border-color: #1a1a1a;
-    box-shadow: 0 0 0 1px #1a1a1a;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+    background: var(--white);
 }
 
 /* Password Wrapper */
@@ -104,18 +128,23 @@
     cursor: pointer;
     font-size: 18px;
     padding: 4px;
-    opacity: 0.6;
+    opacity: 0.5;
     transition: opacity 0.2s ease;
+    filter: none;
+    /* No invert needed for dark text */
+    color: var(--text-secondary);
 }
 
 .toggle-password:hover {
     opacity: 1;
+    color: var(--primary-color);
 }
 
 /* Form Options Row */
 .form-options {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    /* Align Forgot Password to the right */
     align-items: center;
     margin-bottom: 24px;
 }
@@ -126,7 +155,7 @@
     gap: 8px;
     cursor: pointer;
     font-size: 14px;
-    color: #333;
+    color: var(--text-secondary);
 }
 
 .remember-me input[type="checkbox"] {
@@ -134,10 +163,11 @@
     height: 16px;
     cursor: pointer;
     margin: 0;
+    accent-color: var(--primary-color);
 }
 
 .forgot-password {
-    color: #3b82f6;
+    color: var(--primary-color);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -145,56 +175,60 @@
 }
 
 .forgot-password:hover {
-    color: #2563eb;
+    color: var(--brand-orange-hover);
+    text-decoration: underline;
 }
 
 /* Submit Button */
 .submit-btn {
     width: 100%;
     padding: 14px;
-    background: #3b82f6;
+    background: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .submit-btn:hover:not(:disabled) {
-    background: #2563eb;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    background: var(--brand-orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
 }
 
 .submit-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    background: #ccc;
 }
 
 /* Google Button */
 .google-btn {
     width: 100%;
     padding: 14px;
-    background: white;
-    color: #333;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    background: var(--white);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .google-btn:hover:not(:disabled) {
-    background: #f9f9f9;
-    border-color: #d0d0d0;
+    background: var(--off-white);
+    border-color: var(--text-secondary);
 }
 
 .google-btn:disabled {
@@ -212,11 +246,11 @@
     text-align: center;
     margin-top: 24px;
     padding-top: 24px;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid var(--border-color);
 }
 
 .toggle-mode p {
-    color: #666;
+    color: var(--text-secondary);
     font-size: 14px;
     margin: 0;
 }
@@ -224,17 +258,18 @@
 .toggle-mode button {
     background: none;
     border: none;
-    color: #3b82f6;
-    font-weight: 600;
+    color: var(--primary-color);
+    font-weight: 700;
     cursor: pointer;
     margin-left: 6px;
     transition: all 0.2s ease;
     font-size: 14px;
+    text-transform: uppercase;
 }
 
 .toggle-mode button:hover {
     text-decoration: underline;
-    color: #2563eb;
+    color: var(--brand-orange-hover);
 }
 
 /* Back to Home */
@@ -244,7 +279,7 @@
 }
 
 .back-home a {
-    color: #999;
+    color: var(--text-secondary);
     text-decoration: none;
     font-size: 14px;
     display: inline-flex;
@@ -254,7 +289,7 @@
 }
 
 .back-home a:hover {
-    color: #333;
+    color: var(--primary-color);
 }
 
 /* Responsive Design */
