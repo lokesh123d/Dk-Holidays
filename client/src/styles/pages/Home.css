@@ -2,6 +2,13 @@
   padding-top: 70px;
 }
 
+/* Mobile: Remove gap */
+@media (max-width: 768px) {
+  .home-page {
+    padding-top: 0;
+  }
+}
+
 .hero {
   height: calc(100vh - 70px);
   min-height: 600px;
@@ -13,6 +20,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Mobile: Full viewport height */
+@media (max-width: 768px) {
+  .hero {
+    height: 100vh;
+    min-height: 100vh;
+    padding-top: 80px;
+    align-items: flex-start;
+    /* Start from top instead of center */
+    justify-content: flex-start;
+  }
 }
 
 .hero-overlay {
@@ -32,6 +51,14 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* Mobile: Add spacing from top */
+@media (max-width: 768px) {
+  .hero-content {
+    margin-top: 20px;
+    padding: 0 15px;
+  }
 }
 
 .hero-text {
@@ -1685,333 +1712,333 @@
   }
 }
 
-  /* Mobile Devices (600px and below) */
-  @media (max-width: 600px) {
-    .container {
-      padding: 0 15px;
-    }
-
-    .hero {
-      min-height: 450px;
-      padding: 40px 0;
-    }
-
-    .hero-content {
-      max-width: 100%;
-      padding: 0 15px;
-    }
-
-    .hero-subtitle {
-      font-size: 12px;
-    }
-
-    .hero-title {
-      font-size: 26px;
-      line-height: 1.4;
-    }
-
-    .text-red,
-    .text-white,
-    .highlight {
-      display: inline;
-    }
-
-    .hero-description {
-      font-size: 13px;
-      line-height: 1.6;
-      max-width: 100%;
-    }
-
-    .hero-description br {
-      display: none;
-    }
-
-    .cta-btn {
-      padding: 10px 25px;
-      font-size: 14px;
-      width: 100%;
-      max-width: 250px;
-    }
-
-    /* Slider Controls - Smaller on mobile */
-    .slider-nav {
-      width: 30px;
-      height: 30px;
-      font-size: 16px;
-    }
-
-    .slider-dots {
-      bottom: 10px;
-    }
-
-    .slider-dots .dot {
-      width: 6px;
-      height: 6px;
-      margin: 0 3px;
-    }
-
-    /* Sections Padding */
-    .overview-section,
-    .commitment-section,
-    .vehicle-fleet,
-    .offers-section,
-    .reviews-section,
-    .faq-section,
-    .contact-form-section,
-    .services-navigation {
-      padding: 40px 0;
-    }
-
-    .section-title {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .section-description {
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
-
-    .section-text {
-      font-size: 14px;
-    }
-
-    /* Vehicle Cards */
-    .vehicle-card {
-      margin-bottom: 15px;
-    }
-
-    .vehicle-name {
-      font-size: 18px;
-    }
-
-    .vehicle-specs {
-      font-size: 13px;
-      gap: 10px;
-    }
-
-    .spec {
-      font-size: 12px;
-    }
-
-    .price {
-      font-size: 20px;
-    }
-
-    .rent-btn {
-      padding: 8px 20px;
-      font-size: 14px;
-    }
-
-    /* Service Cards */
-    .service-nav-card {
-      padding: 25px 20px !important;
-    }
-
-    .service-nav-card h3 {
-      font-size: 20px;
-    }
-
-    .service-nav-card p {
-      font-size: 14px;
-    }
-
-    .service-nav-icon {
-      width: 60px;
-      height: 60px;
-    }
-
-    .service-nav-icon img {
-      width: 32px;
-      height: 32px;
-    }
-
-    /* Offers */
-    .offers-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .offer-card {
-      padding: 20px;
-    }
-
-    .offer-card h3 {
-      font-size: 20px;
-    }
-
-    /* Reviews */
-    .reviews-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .review-card {
-      padding: 20px;
-    }
-
-    /* FAQ */
-    .faq-question {
-      font-size: 14px;
-      padding: 15px 18px;
-    }
-
-    .faq-answer {
-      font-size: 13px;
-      padding: 0 18px 15px 18px;
-    }
-
-    /* Contact Form */
-    .contact-form-wrapper {
-      flex-direction: column;
-    }
-
-    .contact-info-sidebar {
-      margin-top: 30px;
-    }
-
-    .form-row {
-      flex-direction: column;
-    }
-
-    /* Stats */
-    .stat-number {
-      font-size: 36px;
-    }
-
-    .stat-label {
-      font-size: 13px;
-    }
+/* Mobile Devices (600px and below) */
+@media (max-width: 600px) {
+  .container {
+    padding: 0 15px;
   }
 
-  /* Small Mobile Devices (480px and below) */
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 22px;
-    }
-
-    .hero-subtitle {
-      font-size: 11px;
-    }
-
-    .hero-description {
-      font-size: 12px;
-    }
-
-    .section-title {
-      font-size: 20px;
-    }
-
-    .section-description {
-      font-size: 13px;
-    }
-
-    .cta-btn {
-      font-size: 13px;
-      padding: 10px 20px;
-    }
-
-    /* Slider Controls - Even smaller */
-    .slider-nav {
-      width: 28px;
-      height: 28px;
-      font-size: 14px;
-    }
-
-    .slider-nav.prev {
-      left: 5px;
-    }
-
-    .slider-nav.next {
-      right: 5px;
-    }
-
-    .vehicle-name {
-      font-size: 16px;
-    }
-
-    .price {
-      font-size: 18px;
-    }
-
-    .whatsapp-float {
-      bottom: 15px;
-      right: 15px;
-      width: 45px;
-      height: 45px;
-    }
-
-    .whatsapp-float i {
-      font-size: 24px;
-    }
+  .hero {
+    min-height: 450px;
+    padding: 40px 0;
   }
 
-  /* Extra Small Devices (375px and below) */
-  @media (max-width: 375px) {
-    .hero-title {
-      font-size: 20px;
-    }
-
-    .section-title {
-      font-size: 18px;
-    }
-
-    .container {
-      padding: 0 10px;
-    }
+  .hero-content {
+    max-width: 100%;
+    padding: 0 15px;
   }
 
-  /* Force hero content up on mobile */
-  @media (max-width: 600px) {
-    .hero-content {
-      transform: translateY(-50px) !important;
-    }
+  .hero-subtitle {
+    font-size: 12px;
   }
 
+  .hero-title {
+    font-size: 26px;
+    line-height: 1.4;
+  }
 
+  .text-red,
+  .text-white,
+  .highlight {
+    display: inline;
+  }
 
-  /* Overrides for Service Navigation Images (Replaces Icons) - FIXED */
+  .hero-description {
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .hero-description br {
+    display: none;
+  }
+
+  .cta-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  /* Slider Controls - Smaller on mobile */
+  .slider-nav {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .slider-dots {
+    bottom: 10px;
+  }
+
+  .slider-dots .dot {
+    width: 6px;
+    height: 6px;
+    margin: 0 3px;
+  }
+
+  /* Sections Padding */
+  .overview-section,
+  .commitment-section,
+  .vehicle-fleet,
+  .offers-section,
+  .reviews-section,
+  .faq-section,
+  .contact-form-section,
+  .services-navigation {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .section-description {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+
+  .section-text {
+    font-size: 14px;
+  }
+
+  /* Vehicle Cards */
+  .vehicle-card {
+    margin-bottom: 15px;
+  }
+
+  .vehicle-name {
+    font-size: 18px;
+  }
+
+  .vehicle-specs {
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .spec {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+
+  .rent-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+
+  /* Service Cards */
+  .service-nav-card {
+    padding: 25px 20px !important;
+  }
+
+  .service-nav-card h3 {
+    font-size: 20px;
+  }
+
+  .service-nav-card p {
+    font-size: 14px;
+  }
+
   .service-nav-icon {
-    width: 100% !important;
-    height: 180px !important;
-    border-radius: 12px !important;
-    background: transparent !important;
-    margin-bottom: 20px;
-    overflow: hidden;
-    padding: 0 !important;
+    width: 60px;
+    height: 60px;
   }
 
   .service-nav-icon img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    filter: none !important;
-    transition: transform 0.5s ease !important;
+    width: 32px;
+    height: 32px;
   }
 
-  .service-nav-card:hover .service-nav-icon img {
-    transform: scale(1.1) !important;
-    filter: none !important;
+  /* Offers */
+  .offers-grid {
+    grid-template-columns: 1fr;
   }
 
-  .service-nav-card:hover .service-nav-icon {
-    background: transparent !important;
-    transform: none !important;
+  .offer-card {
+    padding: 20px;
   }
 
-  /* Remove gradient backgrounds from specific cards */
-  .flight-card .service-nav-icon,
-  .train-card .service-nav-icon,
-  .insurance-card .service-nav-icon,
-  .car-card .service-nav-icon {
-    background: transparent !important;
+  .offer-card h3 {
+    font-size: 20px;
   }
 
-  /* Increase Service Cards Width */
-  #services .container {
-    max-width: 1350px !important;
-    padding-left: 20px;
-    padding-right: 20px;
+  /* Reviews */
+  .reviews-grid {
+    grid-template-columns: 1fr;
   }
 
-  .services-nav-grid {
-    gap: 20px !important;
+  .review-card {
+    padding: 20px;
   }
+
+  /* FAQ */
+  .faq-question {
+    font-size: 14px;
+    padding: 15px 18px;
+  }
+
+  .faq-answer {
+    font-size: 13px;
+    padding: 0 18px 15px 18px;
+  }
+
+  /* Contact Form */
+  .contact-form-wrapper {
+    flex-direction: column;
+  }
+
+  .contact-info-sidebar {
+    margin-top: 30px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  /* Stats */
+  .stat-number {
+    font-size: 36px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .hero-subtitle {
+    font-size: 11px;
+  }
+
+  .hero-description {
+    font-size: 12px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .section-description {
+    font-size: 13px;
+  }
+
+  .cta-btn {
+    font-size: 13px;
+    padding: 10px 20px;
+  }
+
+  /* Slider Controls - Even smaller */
+  .slider-nav {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .slider-nav.prev {
+    left: 5px;
+  }
+
+  .slider-nav.next {
+    right: 5px;
+  }
+
+  .vehicle-name {
+    font-size: 16px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  .whatsapp-float {
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .whatsapp-float i {
+    font-size: 24px;
+  }
+}
+
+/* Extra Small Devices (375px and below) */
+@media (max-width: 375px) {
+  .hero-title {
+    font-size: 20px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+}
+
+/* Force hero content up on mobile */
+@media (max-width: 600px) {
+  .hero-content {
+    transform: translateY(-50px) !important;
+  }
+}
+
+
+
+/* Overrides for Service Navigation Images (Replaces Icons) - FIXED */
+.service-nav-icon {
+  width: 100% !important;
+  height: 180px !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.service-nav-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  filter: none !important;
+  transition: transform 0.5s ease !important;
+}
+
+.service-nav-card:hover .service-nav-icon img {
+  transform: scale(1.1) !important;
+  filter: none !important;
+}
+
+.service-nav-card:hover .service-nav-icon {
+  background: transparent !important;
+  transform: none !important;
+}
+
+/* Remove gradient backgrounds from specific cards */
+.flight-card .service-nav-icon,
+.train-card .service-nav-icon,
+.insurance-card .service-nav-icon,
+.car-card .service-nav-icon {
+  background: transparent !important;
+}
+
+/* Increase Service Cards Width */
+#services .container {
+  max-width: 1350px !important;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.services-nav-grid {
+  gap: 20px !important;
+}
