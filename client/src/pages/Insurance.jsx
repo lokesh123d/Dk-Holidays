@@ -219,7 +219,7 @@ const Insurance = () => {
                         <a href="/contact" className="btn-secondary">
                             <i className="fas fa-phone"></i> Contact Us
                         </a>
-                        <a href="https://wa.me/919178212412" className="btn-whatsapp">
+                        <a href="https://wa.me/918626877277" className="btn-whatsapp">
                             <i className="fab fa-whatsapp"></i> Chat on WhatsApp
                         </a>
                     </div>

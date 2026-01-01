@@ -2,39 +2,36 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 
 // CORS Configuration - Allow Firebase Hosting and other origins
 const corsOptions = {
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'https://dk-holidays.web.app',
-            'https://dk-holidays.firebaseapp.com',
-            'http://localhost:5173',
-            'http://localhost:3000',
-            'http://localhost:3001', // Vite dev server
-            'http://127.0.0.1:5173',
-            'http://127.0.0.1:3001'
-        ];
-
-        // Allow requests with no origin (like mobile apps or Postman)
-        if (!origin) return callback(null, true);
-
-        if (allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            console.log('Blocked by CORS:', origin);
-            callback(null, true); // Still allow for now, but log it
-        }
-    },
+    origin: true, // Allow all origins for development to fix CORS issues
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-rapidapi-key', 'x-rapidapi-host', 'Access-Control-Allow-Origin']
 };
 
-// Middleware
+// Middleware - CORS must be first
 app.use(cors(corsOptions));
+
+// Security Middleware: Helmet (Headers)
+app.use(helmet());
+
+// Security Middleware: Rate Limiter
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 1000, // Increased limit for dev
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    message: 'Too many requests from this IP, please try again after 15 minutes'
+});
+// Apply to all API routes
+app.use('/api', limiter);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -46,6 +43,9 @@ const contactRoutes = require('./routes/contactRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const offerRoutes = require('./routes/offerRoutes');
 const flightRoutes = require('./routes/flights');
+const trainRoutes = require('./routes/trains');
+const paymentRoutes = require('./routes/paymentRoutes');
+const tourRoutes = require('./routes/tourRoutes');
 
 // Use routes
 app.use('/api/cars', carRoutes);
@@ -55,6 +55,9 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/offers', offerRoutes);
 app.use('/api/flights', flightRoutes);
+app.use('/api/trains', trainRoutes);
+app.use('/api/payment', paymentRoutes);
+app.use('/api/tours', tourRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {

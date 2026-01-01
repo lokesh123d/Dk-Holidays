@@ -67,7 +67,7 @@ const Contact = () => {
                                     </div>
                                     <div className="contact-text">
                                         <h3>Address</h3>
-                                        <p>Near Norbulingka Institute<br />(Blossom Village Resort)<br />Dharamshala, Himachal Pradesh</p>
+                                        <p>Sidhpur, Near Norblinka Institute<br />(Blossom Village Resort)<br />Khaniara Road, Dharamshala-176215<br />Himachal Pradesh</p>
                                     </div>
                                 </div>
 
@@ -77,7 +77,7 @@ const Contact = () => {
                                     </div>
                                     <div className="contact-text">
                                         <h3>Phone</h3>
-                                        <p>+91 91782 12412</p>
+                                        <p>+91 86268 77277</p>
                                         <p>Available 24/7</p>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@ const Contact = () => {
                                     <a href="#" className="social-link twitter">
                                         <i className="fab fa-twitter"></i>
                                     </a>
-                                    <a href="https://wa.me/919178212412" className="social-link whatsapp">
+                                    <a href="https://wa.me/918626877277" className="social-link whatsapp">
                                         <i className="fab fa-whatsapp"></i>
                                     </a>
                                 </div>

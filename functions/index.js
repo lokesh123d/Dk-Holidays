@@ -2,8 +2,24 @@ const functions = require('firebase-functions');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
+
+// Security Middleware: Helmet (Headers)
+app.use(helmet());
+
+// Security Middleware: Rate Limiter
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: 'Too many requests from this IP, please try again after 15 minutes'
+});
+// Apply to all API routes
+app.use('/api', limiter);
 
 // Middleware
 app.use(cors({ origin: true }));
@@ -18,6 +34,7 @@ const contactRoutes = require('./routes/contactRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const offerRoutes = require('./routes/offerRoutes');
 const flightRoutes = require('./routes/flights');
+const trainRoutes = require('./routes/trains');
 
 // Use routes
 app.use('/api/cars', carRoutes);
@@ -27,6 +44,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/offers', offerRoutes);
 app.use('/api/flights', flightRoutes);
+app.use('/api/trains', trainRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {

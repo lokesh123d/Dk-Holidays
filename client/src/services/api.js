@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { auth } from './firebase';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -12,8 +13,21 @@ const api = axios.create({
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('authToken');
+    async (config) => {
+        let token = localStorage.getItem('authToken');
+
+        // Prefer live token from Firebase SDK to ensure it's not expired/stale rules
+        if (auth.currentUser) {
+            try {
+                // getIdToken(false) returns cached token if valid, refreshes if expired
+                // If we suspect claims changed, we might want true, but false is standard for performance
+                token = await auth.currentUser.getIdToken();
+                localStorage.setItem('authToken', token); // Sync local storage
+            } catch (e) {
+                console.error("Failed to get fresh token", e);
+            }
+        }
+
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

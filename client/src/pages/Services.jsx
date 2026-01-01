@@ -10,22 +10,22 @@ const Services = () => {
         {
             id: 'car-rental',
             icon: 'fa-taxi',
-            title: 'Car Rental',
-            description: 'Premium fleet of Sedans, SUVs, and Buses tailored for your comfort. Experience seamless travel across Dharamshala with our expert chauffeurs.',
+            title: 'Car & Bike Rental',
+            description: 'Premium fleet of cars and bikes tailored for your comfort. Experience seamless travel across Dharamshala with self-drive or chauffeur options.',
             color: '#E50914' // Racing Red
         },
         {
-            id: 'flight-booking',
-            icon: 'fa-plane-departure',
-            title: 'Flight Booking',
-            description: 'Unbeatable deals on domestic and international flights. We ensure a smooth booking experience with flexible cancellation options.',
+            id: 'ticket-booking',
+            icon: 'fa-ticket-alt',
+            title: 'Ticket Booking',
+            description: 'One-stop solution for flight and train tickets. We ensure a smooth booking experience with flexible cancellation and best market rates.',
             color: '#28C76F' // Green
         },
         {
-            id: 'train-booking',
-            icon: 'fa-subway',
-            title: 'Train Reservation',
-            description: 'Confirmed tickets for all major routes. From Tatkal to sleeper class, we handle all your railway reservation needs efficiently.',
+            id: 'tour-packages',
+            icon: 'fa-map-marked-alt',
+            title: 'Tour Packages',
+            description: 'Explore curated holiday packages for Shimla, Manali, and Dharamshala. Complete itinerary planning with hotels and sightseeing included.',
             color: '#7367F0' // Purple/Blue
         },
         {
@@ -69,19 +69,19 @@ const Services = () => {
                             className={selectedService === 'car-rental' ? 'active' : ''}
                             onClick={() => setSelectedService('car-rental')}
                         >
-                            <i className="fas fa-car-alt"></i> Car Rental
+                            <i className="fas fa-car-alt"></i> Car & Bike
                         </button>
                         <button
-                            className={selectedService === 'flight-booking' ? 'active' : ''}
-                            onClick={() => setSelectedService('flight-booking')}
+                            className={selectedService === 'ticket-booking' ? 'active' : ''}
+                            onClick={() => setSelectedService('ticket-booking')}
                         >
-                            <i className="fas fa-plane-departure"></i> Flights
+                            <i className="fas fa-ticket-alt"></i> Ticket Booking
                         </button>
                         <button
-                            className={selectedService === 'train-booking' ? 'active' : ''}
-                            onClick={() => setSelectedService('train-booking')}
+                            className={selectedService === 'tour-packages' ? 'active' : ''}
+                            onClick={() => setSelectedService('tour-packages')}
                         >
-                            <i className="fas fa-subway"></i> Trains
+                            <i className="fas fa-map-marked-alt"></i> Tours
                         </button>
                         <button
                             className={selectedService === 'insurance' ? 'active' : ''}
@@ -153,7 +153,7 @@ const Services = () => {
                         <a href="/contact" className="btn-primary">
                             <i className="fas fa-phone"></i> Contact Us
                         </a>
-                        <a href="https://wa.me/919178212412" className="btn-whatsapp">
+                        <a href="https://wa.me/918626877277" className="btn-whatsapp">
                             <i className="fab fa-whatsapp"></i> WhatsApp
                         </a>
                     </div>

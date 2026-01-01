@@ -2,3 +2,10 @@
 .App {
     min-height: 100vh;
 }
+
+/* Force ToastContainer to be on top of everything */
+.Toastify__toast-container {
+    z-index: 999999 !important;
+    top: 80px !important;
+    /* Push down below navbar */
+}

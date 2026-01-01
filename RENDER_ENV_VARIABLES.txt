@@ -14,7 +14,7 @@ NODE_ENV=production
 ADMIN_EMAILS=thelokesh340@gmail.com,lokesh25@navgurukul.org
 
 # 4. CORS_ORIGINS
-CORS_ORIGINS=http://localhost:3000,https://dk-holidays.vercel.app,https://dk-holidays-*.vercel.app
+CORS_ORIGINS=http://localhost:3000,https://dk-holidays.web.app,https://dk-holidays.firebaseapp.com
 
 # 5. FIREBASE_PROJECT_ID
 FIREBASE_PROJECT_ID=dk-holidays
@@ -22,7 +22,13 @@ FIREBASE_PROJECT_ID=dk-holidays
 # 6. FIREBASE_CLIENT_EMAIL
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@dk-holidays.iam.gserviceaccount.com
 
-# 7. FIREBASE_PRIVATE_KEY (MULTI-LINE - NO QUOTES)
+# 7. RAZORPAY_KEY_ID
+RAZORPAY_KEY_ID=rzp_test_RrwLXYjgFHIREV
+
+# 8. RAZORPAY_KEY_SECRET
+RAZORPAY_KEY_SECRET=Zt6nlHgMIOI9e2Qu8ekX7yr3
+
+# 9. FIREBASE_PRIVATE_KEY (MULTI-LINE - NO QUOTES)
 # Copy from BEGIN to END including all lines:
 
 -----BEGIN PRIVATE KEY-----

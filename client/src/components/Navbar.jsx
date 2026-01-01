@@ -36,7 +36,7 @@ const Navbar = () => {
                 <div className="container">
                     <div className="nav-wrapper">
                         <Link to="/" className="logo" onClick={closeMobileMenu}>
-                            <span className="logo-text">DK Holidays</span>
+                            <img src="/images/dk-logo-new.png" alt="DK Holidays" className="logo-image" />
                         </Link>
 
                         {/* Mobile Menu Button */}
@@ -68,13 +68,13 @@ const Navbar = () => {
                                 </button>
                                 <ul className={`dropdown-menu ${isServicesOpen ? 'show' : ''}`}>
                                     <li>
-                                        <Link to="/services/flights" onClick={closeMobileMenu}>
-                                            Flight Booking
+                                        <Link to="/services/tickets" onClick={closeMobileMenu}>
+                                            Ticket Booking
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/services/trains" onClick={closeMobileMenu}>
-                                            Train Booking
+                                        <Link to="/services/tours" onClick={closeMobileMenu}>
+                                            Tour Packages
                                         </Link>
                                     </li>
                                     <li>
@@ -83,8 +83,11 @@ const Navbar = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/" onClick={closeMobileMenu}>
-                                            Car Rental
+                                        <Link to="/" onClick={(e) => {
+                                            closeMobileMenu();
+                                            setTimeout(() => document.getElementById('vehicle-fleet').scrollIntoView({ behavior: 'smooth' }), 100);
+                                        }}>
+                                            Car & Bike Rental
                                         </Link>
                                     </li>
                                 </ul>

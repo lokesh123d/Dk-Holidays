@@ -33,7 +33,7 @@ const Footer = () => {
                         <h3>FOLLOW US</h3>
                         <ul className="social-links">
                             <li>
-                                <a href="https://wa.me/8091780737" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
+                                <a href="https://wa.me/918626877277" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
                                     <i className="fab fa-whatsapp"></i> WhatsApp
                                 </a>
                             </li>
@@ -61,11 +61,11 @@ const Footer = () => {
                         <ul className="contact-info">
                             <li>
                                 <i className="fas fa-map-marker-alt"></i>
-                                <span>Near Norbulingka Institute (Blossom Village Resort), Dharamshala, Himachal Pradesh</span>
+                                <span>Sidhpur, Near Norblinka Institute (Blossom Village Resort), Khaniara Road, Dharamshala-176215, Himachal Pradesh</span>
                             </li>
                             <li>
                                 <i className="fas fa-phone-alt"></i>
-                                <span>+91 80917 80737</span>
+                                <span>+91 86268 77277</span>
                             </li>
                             <li>
                                 <i className="fas fa-envelope"></i>
@@ -76,7 +76,7 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-bottom">
-                    <p>&copy; {new Date().getFullYear()} DK Holidays. All Rights Reserved. Built for comfort.</p>
+                    <p>&copy; {new Date().getFullYear()} DK Holidays. All Rights Reserved. Built with 🗿 by <strong>Lokesh Dangwal</strong>.</p>
                 </div>
             </div>
         </footer>

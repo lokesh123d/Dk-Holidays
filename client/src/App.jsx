@@ -13,8 +13,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import MyBookings from './pages/MyBookings';
 import CarDetails from './pages/CarDetails';
 import Services from './pages/Services';
-import FlightBooking from './pages/FlightBooking';
-import TrainBooking from './pages/TrainBooking';
+import TicketBooking from './pages/TicketBooking';
+import TourPackages from './pages/TourPackages';
 import Insurance from './pages/Insurance';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
@@ -102,8 +102,8 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/cars/:id" element={<CarDetails />} />
                         <Route path="/services" element={<Services />} />
-                        <Route path="/services/flights" element={<FlightBooking />} />
-                        <Route path="/services/trains" element={<TrainBooking />} />
+                        <Route path="/services/tickets" element={<TicketBooking />} />
+                        <Route path="/services/tours" element={<TourPackages />} />
                         <Route path="/services/insurance" element={<Insurance />} />
                         <Route path="/contact" element={<Contact />} />
 

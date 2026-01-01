@@ -6,8 +6,13 @@ import api from './api';
 export const carService = {
     // Get all cars
     getAllCars: async () => {
-        const response = await api.get('/cars');
-        return response.data;
+        try {
+            const response = await api.get('/cars');
+            return response.data;
+        } catch (error) {
+            console.log("API Error (Cars), returning empty array for fallback");
+            return { success: false, data: [] };
+        }
     },
 
     // Get car by ID
@@ -146,8 +151,12 @@ export const contactService = {
 export const reviewService = {
     // Get all reviews
     getAllReviews: async () => {
-        const response = await api.get('/reviews');
-        return response.data;
+        try {
+            const response = await api.get('/reviews');
+            return response.data;
+        } catch (error) {
+            return { success: false, data: [] };
+        }
     },
 
     // Create review (Admin)
@@ -169,8 +178,12 @@ export const reviewService = {
 export const offerService = {
     // Get all offers
     getAllOffers: async () => {
-        const response = await api.get('/offers');
-        return response.data;
+        try {
+            const response = await api.get('/offers');
+            return response.data;
+        } catch (error) {
+            return { success: false, data: [] };
+        }
     },
 
     // Create offer (Admin)
@@ -184,4 +197,88 @@ export const offerService = {
         const response = await api.delete(`/offers/${id}`);
         return response.data;
     }
+};
+
+/**
+ * Flight API services
+ */
+export const flightService = {
+    // Search flights
+    searchFlights: async (searchParams) => {
+        const response = await api.post('/flights/search', searchParams);
+        return response.data;
+    },
+
+    // Get booking options
+    getBookingOptions: async (bookingToken) => {
+        const response = await api.post('/flights/booking-options', { bookingToken });
+        return response.data;
+    }
+};
+
+/**
+ * Train API services
+ */
+export const trainService = {
+    // Search trains
+    searchTrains: async (searchParams) => {
+        const response = await api.post('/trains/search', searchParams);
+        return response.data;
+    }
+};
+
+/**
+ * Payment API services
+ */
+export const paymentService = {
+    // Admin: Get payment settings
+    getSettings: async () => {
+        const response = await api.get('/payment/settings');
+        return response.data;
+    },
+
+    // Admin: Update payment settings
+    updateSettings: async (data) => {
+        const response = await api.put('/payment/settings', data);
+        return response.data;
+    },
+
+    // User: Create Payment Intent
+    createPaymentIntent: async (data) => {
+        const response = await api.post('/payment/create-payment-intent', data);
+        return response.data;
+    }
+};
+
+// Tour Service
+export const tourService = {
+    getAllTours: async () => {
+        const response = await api.get('/tours');
+        return response.data;
+    },
+    createTour: async (tourData) => {
+        const response = await api.post('/tours', tourData);
+        return response.data;
+    },
+    updateTour: async (id, tourData) => {
+        const response = await api.put(`/tours/${id}`, tourData);
+        return response.data;
+    },
+    deleteTour: async (id) => {
+        const response = await api.delete(`/tours/${id}`);
+        return response.data;
+    }
+};
+
+export default {
+    carService,
+    bookingService,
+    authService,
+    contactService,
+    reviewService,
+    offerService,
+    flightService,
+    trainService,
+    paymentService,
+    tourService
 };

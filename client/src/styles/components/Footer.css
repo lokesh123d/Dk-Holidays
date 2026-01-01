@@ -9,7 +9,8 @@
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    /* Brand and Office cols get more space */
+    grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
     gap: 40px;
     margin-bottom: 60px;
 }
@@ -82,29 +83,39 @@
     margin-bottom: 15px;
 }
 
-.social-link {
+.site-footer .social-link {
     display: flex;
     align-items: center;
     gap: 12px;
     color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.3s ease;
+    /* Reset potential clashes from global styles (e.g. Contact.css) */
+    width: auto;
+    height: auto;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
 }
 
-.social-link i {
+.site-footer .social-link i {
     font-size: 18px;
-    width: 20px;
+    width: 25px;
+    /* Slightly wider for alignment */
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Hover Effect Removed */
-.social-link:hover {
-    color: var(--text-secondary);
-    /* Keep original color */
-    transform: none;
-    /* No movement */
-    cursor: default;
-    /* Optional: standard cursor if no link action desired, though usually kept pointer */
+/* Hover Effect */
+.site-footer .social-link:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
+    cursor: pointer;
+    background: transparent;
+    border: none;
 }
 
 /* Brand Colors for Icons - Keep them visible */
@@ -148,22 +159,27 @@
 }
 
 /* Responsive */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
     }
 }
 
 @media (max-width: 576px) {
     .footer-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
         text-align: center;
     }
 
     .brand-col .footer-logo,
-    .social-link,
+    .site-footer .social-link,
     .contact-info li {
         justify-content: center;
+    }
+
+    .footer-col h3 {
+        margin-bottom: 20px;
     }
 }
