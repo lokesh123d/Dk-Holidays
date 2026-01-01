@@ -197,11 +197,36 @@ const cancelBooking = async (req, res) => {
     }
 };
 
+/**
+ * Delete booking (Admin only)
+ */
+const deleteBooking = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const bookingDoc = await db.collection('bookings').doc(id).get();
+
+        if (!bookingDoc.exists) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
+
+        await db.collection('bookings').doc(id).delete();
+
+        res.json({
+            success: true,
+            message: 'Booking deleted successfully'
+        });
+    } catch (error) {
+        console.error('Error deleting booking:', error);
+        res.status(500).json({ error: 'Failed to delete booking' });
+    }
+};
+
 module.exports = {
     createBooking,
     getAllBookings,
     getUserBookings,
     getBookingById,
     updateBookingStatus,
-    cancelBooking
+    cancelBooking,
+    deleteBooking
 };

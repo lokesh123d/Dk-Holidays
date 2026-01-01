@@ -317,6 +317,20 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleDeleteBooking = async (bookingId) => {
+        if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
+            return;
+        }
+        try {
+            await bookingService.deleteBooking(bookingId);
+            toast.success('Booking deleted successfully!');
+            fetchData();
+        } catch (error) {
+            console.error('Error deleting booking:', error);
+            toast.error('Failed to delete booking: ' + error.message);
+        }
+    };
+
 
 
     return (
@@ -476,6 +490,13 @@ const AdminDashboard = () => {
                                                                             onClick={() => handleUpdateBookingStatus(booking.id, 'cancelled')}
                                                                         >
                                                                             Reject
+                                                                        </button>
+                                                                        <button
+                                                                            className="delete-btn"
+                                                                            onClick={() => handleDeleteBooking(booking.id)}
+                                                                            style={{ marginLeft: '5px' }}
+                                                                        >
+                                                                            Delete
                                                                         </button>
                                                                     </>
                                                                 )}

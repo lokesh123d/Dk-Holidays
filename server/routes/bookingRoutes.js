@@ -6,7 +6,8 @@ const {
     getUserBookings,
     getBookingById,
     updateBookingStatus,
-    cancelBooking
+    cancelBooking,
+    deleteBooking
 } = require('../controllers/bookingController');
 const { verifyToken, isAdmin } = require('../middleware/auth');
 
@@ -19,5 +20,6 @@ router.put('/:id/cancel', verifyToken, cancelBooking);
 // Admin routes
 router.get('/', verifyToken, isAdmin, getAllBookings);
 router.put('/:id/status', verifyToken, isAdmin, updateBookingStatus);
+router.delete('/:id', verifyToken, isAdmin, deleteBooking);
 
 module.exports = router;
