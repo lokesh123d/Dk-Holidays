@@ -491,15 +491,15 @@ const AdminDashboard = () => {
                                                                         >
                                                                             Reject
                                                                         </button>
-                                                                        <button
-                                                                            className="delete-btn"
-                                                                            onClick={() => handleDeleteBooking(booking.id)}
-                                                                            style={{ marginLeft: '5px' }}
-                                                                        >
-                                                                            Delete
-                                                                        </button>
                                                                     </>
                                                                 )}
+                                                                <button
+                                                                    className="delete-btn"
+                                                                    onClick={() => handleDeleteBooking(booking.id)}
+                                                                    style={{ marginLeft: booking.status === 'pending' ? '5px' : '0' }}
+                                                                >
+                                                                    Delete
+                                                                </button>
                                                             </td>
                                                         </tr>
                                                     ))}
