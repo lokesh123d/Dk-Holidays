@@ -457,6 +457,17 @@ tr:hover {
     .admin-content {
         padding: 20px;
     }
+
+    /* Make tables responsive */
+    .data-table,
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 600px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -473,5 +484,107 @@ tr:hover {
 
     .form-row {
         grid-template-columns: 1fr;
+    }
+
+    .admin-section {
+        padding: 15px;
+    }
+
+    .section-header h1 {
+        font-size: 22px;
+    }
+
+    /* Responsive table for mobile */
+    table {
+        font-size: 13px;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
+    }
+
+    .edit-btn,
+    .delete-btn,
+    .approve-btn,
+    .reject-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+        margin: 2px;
+        display: inline-block;
+    }
+
+    /* Stack action buttons on mobile */
+    td:last-child {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Additional responsive improvements for tour table */
+@media (max-width: 768px) {
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .admin-table thead {
+        display: table-header-group;
+    }
+
+    .admin-table tbody {
+        display: table-row-group;
+    }
+
+    .admin-table tr {
+        display: table-row;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        display: table-cell;
+    }
+}
+
+/* Ensure no data message is visible */
+.no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--admin-text-secondary);
+    font-size: 16px;
+}
+
+/* Table container improvements */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--admin-card);
+}
+
+/* Improve mobile scrolling */
+@media (max-width: 480px) {
+
+    .data-table::-webkit-scrollbar,
+    .table-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .data-table::-webkit-scrollbar-thumb,
+    .table-container::-webkit-scrollbar-thumb {
+        background: var(--admin-primary);
+        border-radius: 3px;
+    }
+
+    .data-table::-webkit-scrollbar-track,
+    .table-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
     }
 }

@@ -60,6 +60,31 @@
     letter-spacing: 0.5px;
 }
 
+.modal-contact {
+    margin: 8px 0 0 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-contact i {
+    color: var(--primary-color);
+}
+
+.modal-contact a {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.modal-contact a:hover {
+    color: #d62828;
+    text-decoration: underline;
+}
+
 .close-btn {
     background: transparent;
     border: none;

@@ -1,0 +1,65 @@
+/* Razorpay Light Theme Override */
+/* This CSS overrides Razorpay's default dark theme to create a light theme */
+
+/* Target Razorpay container */
+.razorpay-container {
+    background-color: #ffffff !important;
+}
+
+/* Razorpay payment modal background */
+.razorpay-checkout-frame {
+    background: #ffffff !important;
+}
+
+/* Override dark backgrounds in Razorpay */
+[class*="razorpay"] [style*="background"] {
+    background-color: #ffffff !important;
+}
+
+/* Light theme for payment options panel */
+.razorpay-payment-options {
+    background-color: #f8f9fa !important;
+    color: #333 !important;
+}
+
+/* Text colors for light theme */
+.razorpay-container * {
+    color: #333 !important;
+}
+
+/* Button styling */
+.razorpay-container button {
+    background-color: #EF4747 !important;
+    color: white !important;
+}
+
+/* Input fields */
+.razorpay-container input {
+    background-color: #ffffff !important;
+    border: 1px solid #ddd !important;
+    color: #333 !important;
+}
+
+/* Payment method cards */
+.razorpay-payment-method {
+    background-color: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+/* Selected payment method */
+.razorpay-payment-method.selected {
+    border-color: #EF4747 !important;
+    background-color: #fff5f5 !important;
+}
+
+/* Header */
+.razorpay-header {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+
+/* Footer */
+.razorpay-footer {
+    background-color: #f8f9fa !important;
+    border-top: 1px solid #e0e0e0 !important;
+}

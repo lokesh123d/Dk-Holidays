@@ -77,8 +77,9 @@ const Contact = () => {
                                     </div>
                                     <div className="contact-text">
                                         <h3>Phone</h3>
-                                        <p>+91 86268 77277</p>
-                                        <p>Available 24/7</p>
+                                        <p><a href="tel:8626877277">+91 86268 77277</a></p>
+                                        <p><a href="tel:7833043091">+91 78330 43091</a></p>
+                                        <p style={{ fontSize: '13px', marginTop: '5px' }}>Available 24/7</p>
                                     </div>
                                 </div>
 
@@ -88,8 +89,8 @@ const Contact = () => {
                                     </div>
                                     <div className="contact-text">
                                         <h3>Email</h3>
-                                        <p>info@dkholidays.com</p>
-                                        <p>support@dkholidays.com</p>
+                                        <p><a href="mailto:dkholidays26@gmail.com">dkholidays26@gmail.com</a></p>
+                                        <p style={{ fontSize: '13px', marginTop: '5px' }}>We reply within 24 hours</p>
                                     </div>
                                 </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { bookingService, paymentService } from '../services/apiService';
 import '../styles/components/BookingModal.css';
+import '../styles/razorpay-light-theme.css'; // Razorpay light theme override
 
 const BookingModal = ({ isOpen, onClose, selectedItem, currentUser, bookingType = 'car', extraData = {} }) => {
     const [loading, setLoading] = useState(false);
@@ -260,7 +261,19 @@ const BookingModal = ({ isOpen, onClose, selectedItem, currentUser, bookingType 
                         address: "Dharamshala, HP"
                     },
                     theme: {
-                        color: "#3399cc"
+                        color: "#EF4747", // DK Holidays brand color (red)
+                        backdrop_color: "#FFFFFF" // Light background
+                    },
+                    modal: {
+                        backdropclose: false,
+                        escape: true,
+                        handleback: true,
+                        confirm_close: true,
+                        ondismiss: function () {
+                            toast.info('Payment cancelled');
+                            setLoading(false);
+                        },
+                        animation: true
                     }
                 };
 
@@ -344,7 +357,15 @@ const BookingModal = ({ isOpen, onClose, selectedItem, currentUser, bookingType 
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
-                    <h3 className="modal-title">Book {bookingType.charAt(0).toUpperCase() + bookingType.slice(1)}</h3>
+                    <div>
+                        <h3 className="modal-title">Book {bookingType.charAt(0).toUpperCase() + bookingType.slice(1)}</h3>
+                        <p className="modal-contact">
+                            <i className="fas fa-phone-alt"></i> Call: <a href="tel:8626877277">86268 77277</a> / <a href="tel:7833043091">7833043091</a>
+                        </p>
+                        <p className="modal-contact" style={{ marginTop: '5px' }}>
+                            <i className="fas fa-envelope"></i> Email: <a href="mailto:dkholidays26@gmail.com">dkholidays26@gmail.com</a>
+                        </p>
+                    </div>
                     <button className="close-btn" onClick={onClose}>
                         <i className="fas fa-times"></i>
                     </button>
