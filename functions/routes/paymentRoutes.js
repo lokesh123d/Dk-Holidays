@@ -8,12 +8,10 @@ const {
 const { verifyToken, isAdmin } = require('../middleware/auth');
 
 // Public routes (or authenticated user routes)
-router.post('/create-payment-intent', createPaymentIntent);
-
-// Get payment settings (Public to allow frontend to check enabled provider)
-router.get('/settings', getPaymentSettings);
+router.post('/create-payment-intent', verifyToken, createPaymentIntent);
 
 // Admin routes
+router.get('/settings', verifyToken, isAdmin, getPaymentSettings);
 router.put('/settings', verifyToken, isAdmin, updatePaymentSettings);
 
 module.exports = router;

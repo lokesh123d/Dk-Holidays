@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Import routes
+// Import routes
 const carRoutes = require('./routes/carRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -35,6 +36,8 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const offerRoutes = require('./routes/offerRoutes');
 const flightRoutes = require('./routes/flights');
 const trainRoutes = require('./routes/trains');
+const paymentRoutes = require('./routes/paymentRoutes');
+const tourRoutes = require('./routes/tourRoutes');
 
 // Use routes
 app.use('/api/cars', carRoutes);
@@ -45,6 +48,8 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/offers', offerRoutes);
 app.use('/api/flights', flightRoutes);
 app.use('/api/trains', trainRoutes);
+app.use('/api/payment', paymentRoutes);
+app.use('/api/tours', tourRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {

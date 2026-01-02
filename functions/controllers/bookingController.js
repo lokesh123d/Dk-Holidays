@@ -1,4 +1,14 @@
 const { db } = require('../config/firebase');
+const nodemailer = require('nodemailer');
+
+// Configure Email Transporter
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER, // Env var for admin email
+        pass: process.env.EMAIL_PASS  // Env var for app password
+    }
+});
 
 /**
  * Create new booking
@@ -14,6 +24,40 @@ const createBooking = async (req, res) => {
         };
 
         const bookingRef = await db.collection('bookings').add(bookingData);
+
+
+        // Send Email Notification
+        try {
+            const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: 'lokesh25@gmail.com',
+                subject: `New Booking Request: ${bookingData.type.toUpperCase()}`,
+                text: `
+New Booking Request Received!
+
+Service: ${bookingData.type.toUpperCase()}
+Item: ${bookingData.itemName}
+
+Customer Details:
+Name: ${bookingData.userName}
+Phone: ${bookingData.userPhone}
+Email: ${bookingData.userEmail}
+
+Booking Details:
+Date: ${bookingData.details.date}
+${bookingData.details.returnDate ? `Return Date: ${bookingData.details.returnDate}` : ''}
+${bookingData.details.pickupLocation ? `PickUp: ${bookingData.details.pickupLocation}` : ''}
+${bookingData.details.message ? `Note: ${bookingData.details.message}` : ''}
+
+Est. Price: ₹${bookingData.details.totalPrice}
+                `
+            };
+            await transporter.sendMail(mailOptions);
+            console.log("Email notification sent to lokesh25@gmail.com");
+        } catch (emailError) {
+            console.error("Failed to send email notification:", emailError);
+            // Non-blocking error
+        }
 
         res.status(201).json({
             success: true,
@@ -153,11 +197,36 @@ const cancelBooking = async (req, res) => {
     }
 };
 
+/**
+ * Delete booking (Admin only)
+ */
+const deleteBooking = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const bookingDoc = await db.collection('bookings').doc(id).get();
+
+        if (!bookingDoc.exists) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
+
+        await db.collection('bookings').doc(id).delete();
+
+        res.json({
+            success: true,
+            message: 'Booking deleted successfully'
+        });
+    } catch (error) {
+        console.error('Error deleting booking:', error);
+        res.status(500).json({ error: 'Failed to delete booking' });
+    }
+};
+
 module.exports = {
     createBooking,
     getAllBookings,
     getUserBookings,
     getBookingById,
     updateBookingStatus,
-    cancelBooking
+    cancelBooking,
+    deleteBooking
 };

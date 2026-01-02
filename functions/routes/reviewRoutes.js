@@ -6,9 +6,9 @@ const { verifyToken, isAdmin } = require('../middleware/auth');
 // Get all reviews
 router.get('/', async (req, res) => {
     try {
-        const reviewsSnapshot = await db.collection('reviews')
-            .orderBy('createdAt', 'desc')
-            .get();
+        console.log('📊 Fetching reviews from Firestore...');
+
+        const reviewsSnapshot = await db.collection('reviews').get();
 
         const reviews = [];
         reviewsSnapshot.forEach(doc => {
@@ -18,9 +18,17 @@ router.get('/', async (req, res) => {
             });
         });
 
+        // Sort by createdAt in JavaScript
+        reviews.sort((a, b) => {
+            const dateA = new Date(a.createdAt || 0);
+            const dateB = new Date(b.createdAt || 0);
+            return dateB - dateA;
+        });
+
+        console.log(`✅ Found ${reviews.length} reviews`);
         res.json({ success: true, data: reviews });
     } catch (error) {
-        console.error('Error fetching reviews:', error);
+        console.error('❌ Error fetching reviews:', error);
         res.status(500).json({ success: false, message: error.message });
     }
 });
